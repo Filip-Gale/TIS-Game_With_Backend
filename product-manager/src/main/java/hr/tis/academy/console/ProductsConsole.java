@@ -1,8 +1,19 @@
 package hr.tis.academy.console;
 
+import hr.tis.academy.model.Product;
+import hr.tis.academy.model.ProductsMetadata;
+import hr.tis.academy.repository.ProductRepositoryInMemory;
+import hr.tis.academy.service.ProductService;
+import hr.tis.academy.service.impl.ProductServiceImpl;
+
+import java.text.ParseException;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.Scanner;
 
 public class ProductsConsole {
+    private static ProductService productService = new ProductServiceImpl(new ProductRepositoryInMemory());
+
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
         System.out.println("Welcome to TIS Java/Spring Academy 2024 product-manager app!\nStart with 'help' command to see the list of commands.");
@@ -22,15 +33,36 @@ public class ProductsConsole {
                 }
 
                 else if (command.equals("fetch-products")) {
-                    System.out.println("Fetch products from web: fetch-products");
+                    System.out.println(productService.fetchProductsFromWeb());
                 }
 
                 else if (command.startsWith("fetch-products")) {
-                    System.out.println("Fetch products from web: fetch-products DATE");
+                    String[] inputs = command.split(" ");
+                    if(inputs.length == 2) {
+                        LocalDate date = null;
+                        try {
+                            date = LocalDate.parse(inputs[1], DateTimeFormatter.ofPattern("yyyy-MM-dd"));
+                        } catch (Exception e) {
+                            System.out.println("Invalid date format" + e.getMessage());
+                        }
+
+                        if (date == null)
+                            continue;
+                        ProductsMetadata productsMetadata = productService.getProductsForDate(date);
+                        if (productsMetadata == null)
+                        {
+                            System.out.println("Product not found for specified date!");
+                        }else{
+                            for(Product product : productsMetadata.getProducts())
+                            {
+                                System.out.println(product.getName());
+                            }
+                        }
+                    }
                 }
 
                 else if (command.equals("save-products")) {
-                    System.out.println("Fetch products from web: save-products");
+                    System.out.println(productService.saveProductsFromWeb());
                 }
 
                 else if (command.equals("exit")) {
