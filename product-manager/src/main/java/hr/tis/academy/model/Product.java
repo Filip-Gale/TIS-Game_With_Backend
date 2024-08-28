@@ -1,6 +1,8 @@
 package hr.tis.academy.model;
 
 import java.math.BigDecimal;
+import java.text.DecimalFormat;
+import java.text.NumberFormat;
 
 public class Product {
 
@@ -9,11 +11,13 @@ public class Product {
   private String currency;
   private int score;
 
-  public int getScore() {
-    return score;
-  }
 
   public Product() {
+    this.score = 0;
+  }
+
+  public int getScore() {
+    return score;
   }
 
   public Product(String name, BigDecimal price, String currency, int score) {
@@ -49,5 +53,16 @@ public class Product {
 
   public void setCurrency(String currency) {
     this.currency = currency;
+  }
+
+  @Override
+  public String toString() {
+    DecimalFormat df = new DecimalFormat("#,###.00");
+
+    return "Product{" +
+            "name='" + name + '\'' +
+            ", price=" + df.format(price) + " " + currency +
+            ", score=" + score +
+            '}';
   }
 }
