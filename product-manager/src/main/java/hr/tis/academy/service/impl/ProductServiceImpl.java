@@ -9,8 +9,11 @@ import hr.tis.academy.service.ProductService;
 import java.time.LocalDate;
 
 public class ProductServiceImpl implements ProductService {
-    private final ProductRepository productRepository = new ProductRepositoryInMemory();
+    private final ProductRepository productRepository;
     private final WebScraper webScraper = new WebScraper();
+    public ProductServiceImpl(ProductRepository productRepository) {
+        this.productRepository = productRepository;
+    }
     @Override
     public ProductsMetadata fetchProductsFromWeb() {
         return webScraper.fetchProducts();
@@ -19,11 +22,12 @@ public class ProductServiceImpl implements ProductService {
     @Override
     public ProductsMetadata saveProductsFromWeb() {
         ProductsMetadata productsMetadata = webScraper.fetchProducts();
+        productRepository.insertProducts(productsMetadata);
         return null;
     }
 
     @Override
     public ProductsMetadata getProductsForDate(LocalDate date) {
-        return null;
+        return productRepository.fetchProductsMetadata(date);
     }
 }

@@ -21,6 +21,7 @@ public class WebScraper {
         String pageTitle = "";
         try{
             Integer countOfItems = 0;
+            //Max 3 stranice!
             for (int i = 1; i < 4; i++)
             {
                 Document doc = Jsoup.connect("https://www.konzum.hr/web/posebne-ponude?page="+i+"&per_page=25&sort%5B%5D=").get();
