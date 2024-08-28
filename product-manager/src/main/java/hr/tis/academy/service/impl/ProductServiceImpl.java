@@ -1,12 +1,15 @@
 package hr.tis.academy.service.impl;
 
 import hr.tis.academy.model.ProductsMetadata;
+import hr.tis.academy.repository.ProductRepository;
+import hr.tis.academy.repository.ProductRepositoryInMemory;
 import hr.tis.academy.scraper.WebScraper;
 import hr.tis.academy.service.ProductService;
 
 import java.time.LocalDate;
 
 public class ProductServiceImpl implements ProductService {
+    private final ProductRepository productRepository = new ProductRepositoryInMemory();
     private final WebScraper webScraper = new WebScraper();
     @Override
     public ProductsMetadata fetchProductsFromWeb() {
