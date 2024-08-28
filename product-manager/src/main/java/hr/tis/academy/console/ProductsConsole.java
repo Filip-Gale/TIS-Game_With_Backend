@@ -12,16 +12,35 @@ public class ProductsConsole {
             String command = sc.nextLine().trim();
 
             try{
-                switch (command)
+                if(command.equals("help"))
                 {
-                    case "help":
-                        System.out.println("Choose how to save the products from commands: (file, in-memory,db)\n" +
-                        "Fetch products from web: fetch-products\n" +
-                                "Fetch products for date in format yyyy-MM-dd: fetch-products {date}\n" +
-                                "Fetch and save products: save-products\n" +
-                                "Exit console: exit");
-
+                    System.out.println("Choose how to save the products from commands: (file, in-memory,db)\n" +
+                            "Fetch products from web: fetch-products\n" +
+                            "Fetch products for date in format yyyy-MM-dd: fetch-products {date}\n" +
+                            "Fetch and save products: save-products\n" +
+                            "Exit console: exit");
                 }
+
+                else if (command.equals("fetch-products")) {
+                    System.out.println("Fetch products from web: fetch-products");
+                }
+
+                else if (command.startsWith("fetch-products")) {
+                    System.out.println("Fetch products from web: fetch-products DATE");
+                }
+
+                else if (command.equals("save-products")) {
+                    System.out.println("Fetch products from web: save-products");
+                }
+
+                else if (command.equals("exit")) {
+                    break;
+                }
+
+                else{
+                    System.out.println("Unknown command: " + command);
+                }
+
             }catch (Exception e){
                 System.out.println(e.getMessage());
             }
