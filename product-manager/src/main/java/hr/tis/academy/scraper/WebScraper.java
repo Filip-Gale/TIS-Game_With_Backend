@@ -10,6 +10,7 @@ import org.jsoup.select.Elements;
 import java.io.IOException;
 import java.math.BigDecimal;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -37,7 +38,7 @@ public class WebScraper {
                     BigDecimal price = priceEurDecimal.add(priceCentDecimal);
 
                     System.out.println("Proizvod:" + title + "\nRating: " + rating);
-                    Product product = new Product(title, price);
+                    Product product = new Product(title, price, byPiece, Math.toIntExact(rating));
                     productList.add(product);
                     countOfItems++;
                 }
@@ -48,6 +49,6 @@ public class WebScraper {
         } catch (IOException e){
             throw new RuntimeException(e);
         }
-        return new ProductsMetadata(null, LocalDate.now(), pageTitle, productList);
+        return new ProductsMetadata(null, LocalDateTime.now(), pageTitle, productList);
     }
 }
