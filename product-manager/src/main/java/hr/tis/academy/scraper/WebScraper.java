@@ -1,5 +1,7 @@
 package hr.tis.academy.scraper;
 
+import hr.tis.academy.model.Product;
+import hr.tis.academy.model.ProductsMetadata;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
@@ -7,20 +9,22 @@ import org.jsoup.select.Elements;
 
 import java.io.IOException;
 import java.math.BigDecimal;
+import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
 
 public class WebScraper {
-    public static void main(String[] args) {
-        fetchProducts();
-    }
 
-    public static void fetchProducts(){
+    public ProductsMetadata fetchProducts(){
+        List<Product> productList = new ArrayList<>();
+        String pageTitle = "";
         try{
             Integer countOfItems = 0;
             for (int i = 1; i < 4; i++)
             {
                 Document doc = Jsoup.connect("https://www.konzum.hr/web/posebne-ponude?page="+i+"&per_page=25&sort%5B%5D=").get();
+                pageTitle = doc.title();
                 Elements paragraphs = doc.getElementsByClass("product-wrapper");
-
                 for (Element paragraph : paragraphs) {
                     String title = paragraph.getElementsByClass("product-default__title").getFirst().child(0).text();
                     Long rating = paragraph.getElementsByClass("stars").getFirst().getElementsByClass("is-active").stream().count();
@@ -33,6 +37,8 @@ public class WebScraper {
                     BigDecimal price = priceEurDecimal.add(priceCentDecimal);
 
                     System.out.println("Proizvod:" + title + "\nRating: " + rating);
+                    Product product = new Product(title, price);
+                    productList.add(product);
                     countOfItems++;
                 }
             }
@@ -42,5 +48,6 @@ public class WebScraper {
         } catch (IOException e){
             throw new RuntimeException(e);
         }
+        return new ProductsMetadata(null, LocalDate.now(), pageTitle, productList);
     }
 }
