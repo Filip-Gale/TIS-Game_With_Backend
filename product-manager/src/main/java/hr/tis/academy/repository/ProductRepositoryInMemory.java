@@ -1,25 +1,80 @@
 package hr.tis.academy.repository;
 
+import hr.tis.academy.model.Product;
+import hr.tis.academy.model.ProductsMetadata;
+
 import java.math.BigDecimal;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
+import java.util.Comparator;
+import java.util.List;
+import java.util.Optional;
 
 public class ProductRepositoryInMemory implements  ProductRepository{
 
-    //private static final List<ProductsMetadata> productsMetadataList = new ArrayList<>();.
+    private static final List<ProductsMetadata> productsMetadataList = new ArrayList<>();
+
+    @Override
+    public Long insertProducts(ProductsMetadata productsMetadata) {
+
+        productsMetadataList.add(productsMetadata);
+        productsMetadata.setId((long)productsMetadataList.size());
+
+        return productsMetadata.getId();
+    }
 
     @Override
     public BigDecimal fetchSumOfPrices(LocalDate createdDate) {
-        return null;
+
+        ProductsMetadata temp = fetchProductsMetadata(createdDate);
+
+        return calculateSumOfPrices(temp.getProducts());
     }
 
     @Override
     public BigDecimal fetchSumOfPrices(Long id) {
-        return null;
+        return  calculateSumOfPrices(productsMetadataList.get(
+                Integer.parseInt(String.valueOf(id)))
+                .getProducts());
+    }
+
+    @Override
+    public ProductsMetadata fetchProductsMetadata(LocalDate createdDate) {
+        Optional<ProductsMetadata> temp = productsMetadataList.stream()
+                .filter(productsMetadata -> productsMetadata.getCreationDateTime().toLocalDate().equals(createdDate))
+                .max(Comparator.comparing(ProductsMetadata::getCreationDateTime))
+                .stream()
+                .findFirst();
+
+        if(temp.isPresent()){
+            return temp.get();
+        }
+        return  null;
+    }
+
+    @Override
+    public ProductsMetadata fetchProductsMetadata(Long id) {
+        return productsMetadataList.get(Integer.parseInt(String.valueOf(id)));
     }
 
     @Override
     public Integer fetchProductsMetadataCount() {
-        return 0;
+        return productsMetadataList.size();
+    }
+
+    @Override
+    public BigDecimal calculateSumOfPrices(List<Product> products) {
+        BigDecimal sum = BigDecimal.ZERO;
+
+        for (Product p : products) {
+            sum = sum.add(p.getPrice());
+        }
+        return  sum;
+        //return products.stream().mapToDouble(i -> i.getPrice()).sum();
+    }
+
+    public List<ProductsMetadata> getProductsMetadataList(){
+        return productsMetadataList;
     }
 }
