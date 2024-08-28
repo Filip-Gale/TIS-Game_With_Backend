@@ -9,6 +9,10 @@ public class ProductsMetadata {
   private String title;
   private List<Product> products;
 
+  public ProductsMetadata() {
+
+  }
+
   public Long getId() {
     return id;
   }
@@ -46,5 +50,12 @@ public class ProductsMetadata {
 
   public void setProducts(List<Product> products) {
     this.products = products;
+  }
+
+  public static void main(String[] args) {
+    ProductsMetadata productsMetadata = new ProductsMetadata();  }
+  @Override
+  public String toString() {
+    return super.toString();
   }
 }

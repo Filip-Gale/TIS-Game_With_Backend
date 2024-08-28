@@ -13,6 +13,9 @@ public class Product {
     return score;
   }
 
+  public Product() {
+  }
+
   public Product(String name, BigDecimal price, String currency, int score) {
     this.name = name;
     this.price = price;
