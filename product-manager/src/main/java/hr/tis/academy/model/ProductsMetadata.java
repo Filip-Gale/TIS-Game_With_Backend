@@ -1,6 +1,10 @@
 package hr.tis.academy.model;
 
+import hr.tis.academy.repository.ProductRepositoryInMemory;
+
+import java.math.BigDecimal;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 
 public class ProductsMetadata {
@@ -46,5 +50,29 @@ public class ProductsMetadata {
 
   public void setProducts(List<Product> products) {
     this.products = products;
+  }
+
+  public static void main(String[] args) {
+    ArrayList<Product> products = new ArrayList<>();
+    ArrayList<Product> products2 = new ArrayList<>();
+
+    products.add(new Product("lol", BigDecimal.valueOf(1),"r",3));
+    products.add(new Product("lol2",BigDecimal.valueOf(12),"r2",4));
+
+    products2.add(new Product("lol",BigDecimal.valueOf(1),"r",3));
+    products2.add(new Product("lol2",BigDecimal.valueOf(15),"r2",4));
+
+    ProductsMetadata p = new ProductsMetadata(0L, LocalDateTime.now(),"yay",products);
+    ProductsMetadata p2 = new ProductsMetadata(1L, LocalDateTime.now(),"yay2",products2);
+
+
+
+
+    ProductRepositoryInMemory prim = new ProductRepositoryInMemory();
+
+    prim.getProductsMetadataList().add(p);
+    prim.getProductsMetadataList().add(p2);
+
+    System.out.println( prim.calculateSumOfPrices(p.getProducts()));
   }
 }
