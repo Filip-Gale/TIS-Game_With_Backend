@@ -12,6 +12,10 @@ public class Database {
         }
     }
 
+    public static void main(String[] args) {
+        init();
+    }
+
     private static final String DB_URL = "jdbc:h2:./db/academy";
     private static Database instance;
 
