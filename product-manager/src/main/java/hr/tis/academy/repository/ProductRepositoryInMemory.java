@@ -2,6 +2,7 @@ package hr.tis.academy.repository;
 
 import hr.tis.academy.model.Product;
 import hr.tis.academy.model.ProductsMetadata;
+import hr.tis.academy.repository.exception.NoProductFoundException;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
@@ -10,6 +11,7 @@ import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 public class ProductRepositoryInMemory implements  ProductRepository{
 
@@ -40,17 +42,14 @@ public class ProductRepositoryInMemory implements  ProductRepository{
     }
 
     @Override
-    public ProductsMetadata fetchProductsMetadata(LocalDate createdDate) {
+    public ProductsMetadata fetchProductsMetadata(LocalDate createdDate) throws NoProductFoundException {
         Optional<ProductsMetadata> temp = productsMetadataList.stream()
                 .filter(productsMetadata -> productsMetadata.getCreationDateTime().toLocalDate().equals(createdDate))
                 .max(Comparator.comparing(ProductsMetadata::getCreationDateTime))
                 .stream()
                 .findFirst();
 
-        if(temp.isPresent()){
-            return temp.get();
-        }
-        return  null;
+        return temp.orElseThrow(() -> new NoProductFoundException("No product found for " + createdDate));
     }
 
     @Override

@@ -62,16 +62,16 @@ public class ProductsMetadata {
     products2.add(new Product("lol",BigDecimal.valueOf(1),"r",3));
     products2.add(new Product("lol2",BigDecimal.valueOf(15),"r2",4));
 
-    ProductsMetadata p = new ProductsMetadata(0L, LocalDateTime.now(),"yay",products);
-    ProductsMetadata p2 = new ProductsMetadata(1L, LocalDateTime.now(),"yay2",products2);
+    ProductsMetadata p = new ProductsMetadata(null, LocalDateTime.now(),"yay",products);
+    ProductsMetadata p2 = new ProductsMetadata(null, LocalDateTime.now(),"yay2",products2);
 
 
 
 
     ProductRepositoryInMemory prim = new ProductRepositoryInMemory();
 
-    prim.getProductsMetadataList().add(p);
-    prim.getProductsMetadataList().add(p2);
+    prim.insertProducts(p);
+    prim.insertProducts(p2);
 
     System.out.println( prim.calculateSumOfPrices(p.getProducts()));
   }
