@@ -1,8 +1,10 @@
 package hr.tis.academy.model;
 
+import hr.tis.academy.repository.ProductRepositoryFile;
 import hr.tis.academy.repository.ProductRepositoryInMemory;
 
 import java.math.BigDecimal;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
@@ -36,6 +38,8 @@ public class ProductsMetadata {
     this.products = products;
   }
 
+  public ProductsMetadata() {}
+
   public String getTitle() {
     return title;
   }
@@ -64,23 +68,31 @@ public class ProductsMetadata {
     ArrayList<Product> products = new ArrayList<>();
     ArrayList<Product> products2 = new ArrayList<>();
 
-    products.add(new Product("lol", BigDecimal.valueOf(1),"r",3));
-    products.add(new Product("lol2",BigDecimal.valueOf(12),"r2",4));
+    products.add(new Product("Maslac 250g", new BigDecimal("1"),"r",3));
+    products.add(new Product("Jagoda 10g",new BigDecimal("12"),"r2",4));
 
-    products2.add(new Product("lol",BigDecimal.valueOf(1),"r",3));
-    products2.add(new Product("lol2",BigDecimal.valueOf(15),"r2",4));
+    products2.add(new Product("Pekmez 100kg",new BigDecimal("1"),"r",3));
+    products2.add(new Product("Čokolino 1kg",new BigDecimal("7.19"),"EUR/kg",5));
 
-    ProductsMetadata p = new ProductsMetadata(0L, LocalDateTime.now(),"yay",products);
-    ProductsMetadata p2 = new ProductsMetadata(1L, LocalDateTime.now(),"yay2",products2);
-
-
-
+    ProductsMetadata p = new ProductsMetadata(null, LocalDateTime.now(),"Lista 1",products);
+    ProductsMetadata p2 = new ProductsMetadata(null, LocalDateTime.now(),"Lista 2",products2);
+    ProductsMetadata p3 = new ProductsMetadata(null, LocalDateTime.now(),"Lista 3",products2);
 
     ProductRepositoryInMemory prim = new ProductRepositoryInMemory();
 
-    prim.getProductsMetadataList().add(p);
-    prim.getProductsMetadataList().add(p2);
+    prim.insertProducts(p);
+    prim.insertProducts(p2);
 
-    System.out.println( prim.calculateSumOfPrices(p.getProducts()));
+    System.out.println("calculateSumOfPrices " + prim.calculateSumOfPrices(p.getProducts()));
+
+    //System.out.println(ProductReader.read("1_2024-08-30T11$25$37.002657200_Lista 3.txt").getTitle());
+
+    ProductRepositoryFile prf = new ProductRepositoryFile();
+    System.out.println("insertProducts(p3) " + prf.insertProducts(p3));
+    System.out.println("fetchSumOfPrices(LocalDate.now()) " + prf.fetchSumOfPrices(LocalDate.now()));
+    prf.fetchProductsMetadata(LocalDate.now());
+    System.out.println("fetchSumOfPrices(1L); " + prf.fetchSumOfPrices(1L));
+    System.out.println("fetchProductsMetadata " + prf.fetchProductsMetadata(1L));
+    System.out.println("fetchProductsMetadataCount " + prf.fetchProductsMetadataCount());
   }
 }

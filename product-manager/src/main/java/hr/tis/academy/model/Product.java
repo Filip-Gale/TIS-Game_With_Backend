@@ -1,6 +1,7 @@
 package hr.tis.academy.model;
 
 import java.math.BigDecimal;
+import java.text.DecimalFormat;
 
 public class Product {
 
@@ -50,6 +51,12 @@ public class Product {
 
   @Override
   public String toString() {
-    return name + price.toString() + currency;
+    DecimalFormat df = new DecimalFormat("#,###.00");
+
+    return "Product{" +
+            "name='" + name + '\'' +
+            ", price=" + df.format(price) + " " + currency +
+            ", score=" + score +
+            '}';
   }
 }
