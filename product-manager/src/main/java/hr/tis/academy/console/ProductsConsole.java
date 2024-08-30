@@ -12,7 +12,7 @@ import java.time.format.DateTimeFormatter;
 import java.util.Scanner;
 
 public class ProductsConsole {
-    private static ProductService productService = new ProductServiceImpl(new ProductRepositoryInMemory());
+    private static ProductService productService = null;
 
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
@@ -33,33 +33,56 @@ public class ProductsConsole {
                 }
 
                 else if (command.equals("fetch-products")) {
-                    System.out.println(productService.fetchProductsFromWeb());
+                    if(isRepositorySet())
+                    {
+                        System.out.println(productService.fetchProductsFromWeb());
+                    }
                 }
 
                 else if (command.startsWith("fetch-products")) {
-                    String[] inputs = command.split(" ");
-                    if(inputs.length == 2) {
-                        LocalDate date = null;
-                        try {
-                            date = LocalDate.parse(inputs[1], DateTimeFormatter.ofPattern("yyyy-MM-dd"));
-                        } catch (Exception e) {
-                            System.out.println("Invalid date format" + e.getMessage());
-                        }
+                    if(isRepositorySet())
+                    {
+                        String[] inputs = command.split(" ");
+                        if(inputs.length == 2) {
+                            LocalDate date = null;
+                            try {
+                                date = LocalDate.parse(inputs[1], DateTimeFormatter.ofPattern("yyyy-MM-dd"));
+                            } catch (Exception e) {
+                                System.out.println("Invalid date format" + e.getMessage());
+                            }
 
-                        if (date == null)
-                            continue;
-                        ProductsMetadata productsMetadata = productService.getProductsForDate(date);
-                        if (productsMetadata == null)
-                        {
-                            System.out.println("Product not found for specified date!");
-                        }else{
-                            System.out.println(productsMetadata);
+                            if (date == null)
+                                continue;
+                            ProductsMetadata productsMetadata = productService.getProductsForDate(date);
+                            if (productsMetadata == null)
+                            {
+                                System.out.println("Product not found for specified date!");
+                            }else{
+                                System.out.println(productsMetadata);
+                            }
                         }
                     }
                 }
 
                 else if (command.equals("save-products")) {
-                    System.out.println(productService.saveProductsFromWeb());
+                    if(isRepositorySet())
+                    {
+                        System.out.println(productService.saveProductsFromWeb());
+                    }
+                }
+                else if (command.equals("file") || command.equals("in-memory") || command.equals("db")) {
+                    if(command.equals("file"))
+                    {
+                        //Promjeniti na ProductRepositoryFile
+                        productService = new ProductServiceImpl(new ProductRepositoryInMemory());
+                    }else if(command.equals("in-memory"))
+                    {
+                        productService = new ProductServiceImpl(new ProductRepositoryInMemory());
+                    }else
+                    {
+                        //Promjeniti na ProductRepositoryDB
+                        productService = new ProductServiceImpl(new ProductRepositoryInMemory());
+                    }
                 }
 
                 else if (command.equals("exit")) {
@@ -74,5 +97,15 @@ public class ProductsConsole {
                 System.out.println(e.getMessage());
             }
         }
+    }
+
+    private static boolean isRepositorySet(){
+        if(productService == null)
+        {
+            System.out.println("Product service not initialized. Please set how to save files: file   in-memory   db");
+            return false;
+        }
+
+        return true;
     }
 }
