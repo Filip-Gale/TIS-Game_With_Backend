@@ -64,7 +64,7 @@ public class ProductsMetadata {
     products.add(new Product("Maslac 250g", new BigDecimal("1"),"r",3));
     products.add(new Product("Jagoda 10g",new BigDecimal("12"),"r2",4));
 
-    products2.add(new Product("tri",new BigDecimal("1"),"r",3));
+    products2.add(new Product("Pekmez 100kg",new BigDecimal("1"),"r",3));
     products2.add(new Product("Čokolino 1kg",new BigDecimal("7.19"),"EUR/kg",5));
 
     ProductsMetadata p = new ProductsMetadata(null, LocalDateTime.now(),"Lista 1",products);
