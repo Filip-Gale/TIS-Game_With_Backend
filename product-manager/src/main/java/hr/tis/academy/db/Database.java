@@ -1,5 +1,8 @@
 package hr.tis.academy.db;
 
+import hr.tis.academy.repository.ProductRepository;
+import hr.tis.academy.repository.ProductRepositoryDB;
+
 import java.sql.*;
 
 public class Database {
