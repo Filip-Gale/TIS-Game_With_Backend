@@ -21,6 +21,7 @@ public class ProductRepositoryInMemory implements  ProductRepository{
     public Long insertProducts(ProductsMetadata productsMetadata) {
 
         productsMetadataList.add(productsMetadata);
+        //System.out.println("(long)productsMetadataList.size() " + (long)productsMetadataList.size());
         productsMetadata.setId((long)productsMetadataList.size());
 
         return productsMetadata.getId();
