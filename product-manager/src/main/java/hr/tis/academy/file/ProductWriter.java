@@ -26,12 +26,6 @@ public class ProductWriter {
                         product.getPrice(),
                         product.getCurrency(),
                         product.getScore());
-
-                /*String formattedString = String.format("%-100s%10.2f%-10s%d",
-                        product.getName(),
-                        product.getPrice(),
-                        product.getCurrency(),
-                        product.getScore());*/
                 try {
                     writer.write(formattedString);
                     writer.newLine();

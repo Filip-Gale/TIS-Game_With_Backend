@@ -15,6 +15,6 @@ public interface ProductRepository {
     ProductsMetadata fetchProductsMetadata(LocalDate createdDate);
     ProductsMetadata fetchProductsMetadata(Long id);
     Integer fetchProductsMetadataCount();
-// dodati i implementirati defaultnu metodu
+
     BigDecimal calculateSumOfPrices(List<Product> products);
 }

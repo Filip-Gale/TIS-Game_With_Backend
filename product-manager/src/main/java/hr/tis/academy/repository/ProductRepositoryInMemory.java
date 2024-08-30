@@ -71,7 +71,6 @@ public class ProductRepositoryInMemory implements  ProductRepository{
             sum = sum.add(p.getPrice());
         }
         return  sum;
-        //return products.stream().mapToDouble(i -> i.getPrice()).sum();
     }
 
     public List<ProductsMetadata> getProductsMetadataList(){

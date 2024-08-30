@@ -78,17 +78,17 @@ public class ProductsMetadata {
     prim.insertProducts(p);
     prim.insertProducts(p2);
 
-    //System.out.println("calculateSumOfPrices " + prim.calculateSumOfPrices(p.getProducts()));
+    System.out.println("calculateSumOfPrices " + prim.calculateSumOfPrices(p.getProducts()));
 
-    //ProductWriter.writeProducts(p2);
+    ProductWriter.writeProducts(p2);
 
-    //System.out.println(ProductReader.read("1_2024-08-30T01$59$50.077972600_yay3.txt").getTitle());
+    System.out.println(ProductReader.read("1_2024-08-30T01$59$50.077972600_yay3.txt").getTitle());
 
     ProductRepositoryFile prf = new ProductRepositoryFile();
     prf.insertProducts(p3);
-    //prf.fetchProductsMetadata(LocalDate.now());
+    prf.fetchProductsMetadata(LocalDate.now());
     System.out.println("prf.fetchSumOfPrices(1L); " + prf.fetchSumOfPrices(1L));
-    //System.out.println("fetchProductsMetadata " + prf.fetchProductsMetadata(1L));
-    //System.out.println("fetchProductsMetadataCount " + prf.fetchProductsMetadataCount());
+    System.out.println("fetchProductsMetadata " + prf.fetchProductsMetadata(1L));
+    System.out.println("fetchProductsMetadataCount " + prf.fetchProductsMetadataCount());
   }
 }
