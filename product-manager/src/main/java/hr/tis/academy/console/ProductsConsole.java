@@ -53,10 +53,7 @@ public class ProductsConsole {
                         {
                             System.out.println("Product not found for specified date!");
                         }else{
-                            for(Product product : productsMetadata.getProducts())
-                            {
-                                System.out.println(product.getName());
-                            }
+                            System.out.println(productsMetadata);
                         }
                     }
                 }

@@ -52,6 +52,14 @@ public class ProductsMetadata {
     this.products = products;
   }
 
+  @Override
+  public String toString() {
+    StringBuilder sb = new StringBuilder();
+    sb.append(title).append(" ").append(creationDateTime).append("\n");
+
+    return sb.toString();
+  }
+
   public static void main(String[] args) {
     ArrayList<Product> products = new ArrayList<>();
     ArrayList<Product> products2 = new ArrayList<>();
