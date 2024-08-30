@@ -1,5 +1,7 @@
 package hr.tis.academy.model;
 
+import hr.tis.academy.repository.ProductRepository;
+import hr.tis.academy.repository.ProductRepositoryDB;
 import hr.tis.academy.repository.ProductRepositoryFile;
 import hr.tis.academy.repository.ProductRepositoryInMemory;
 
@@ -94,5 +96,11 @@ public class ProductsMetadata {
     System.out.println("fetchSumOfPrices(1L); " + prf.fetchSumOfPrices(1L));
     System.out.println("fetchProductsMetadata " + prf.fetchProductsMetadata(1L));
     System.out.println("fetchProductsMetadataCount " + prf.fetchProductsMetadataCount());
+
+    ProductRepository prdb = new ProductRepositoryDB();
+
+    prdb.insertProducts(p);
+    prdb.insertProducts(p2);
+    System.out.println( prdb.fetchSumOfPrices(p.getCreationDateTime().toLocalDate()));
   }
 }
