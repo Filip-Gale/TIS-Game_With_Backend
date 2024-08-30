@@ -1,6 +1,5 @@
 package hr.tis.academy.model;
 
-import hr.tis.academy.file.ProductReader;
 import hr.tis.academy.repository.ProductRepositoryFile;
 import hr.tis.academy.repository.ProductRepositoryInMemory;
 
