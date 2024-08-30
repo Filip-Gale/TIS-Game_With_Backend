@@ -78,7 +78,7 @@ public class ProductsMetadata {
 
     System.out.println("calculateSumOfPrices " + prim.calculateSumOfPrices(p.getProducts()));
 
-    System.out.println(ProductReader.read("1_2024-08-30T11$25$37.002657200_Lista 3.txt").getTitle());
+    //System.out.println(ProductReader.read("1_2024-08-30T11$25$37.002657200_Lista 3.txt").getTitle());
 
     ProductRepositoryFile prf = new ProductRepositoryFile();
     System.out.println("insertProducts(p3) " + prf.insertProducts(p3));
