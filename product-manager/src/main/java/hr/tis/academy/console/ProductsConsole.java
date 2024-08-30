@@ -2,6 +2,8 @@ package hr.tis.academy.console;
 
 import hr.tis.academy.model.Product;
 import hr.tis.academy.model.ProductsMetadata;
+import hr.tis.academy.repository.ProductRepositoryDB;
+import hr.tis.academy.repository.ProductRepositoryFile;
 import hr.tis.academy.repository.ProductRepositoryInMemory;
 import hr.tis.academy.service.ProductService;
 import hr.tis.academy.service.impl.ProductServiceImpl;
@@ -74,14 +76,14 @@ public class ProductsConsole {
                     if(command.equals("file"))
                     {
                         //Promjeniti na ProductRepositoryFile
-                        productService = new ProductServiceImpl(new ProductRepositoryInMemory());
+                        productService = new ProductServiceImpl(new ProductRepositoryFile());
                     }else if(command.equals("in-memory"))
                     {
                         productService = new ProductServiceImpl(new ProductRepositoryInMemory());
                     }else
                     {
                         //Promjeniti na ProductRepositoryDB
-                        productService = new ProductServiceImpl(new ProductRepositoryInMemory());
+                        productService = new ProductServiceImpl(new ProductRepositoryDB());
                     }
                 }
 
