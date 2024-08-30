@@ -11,7 +11,6 @@ import java.io.File;
 import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.util.*;
-import java.util.stream.Collectors;
 
 public class ProductRepositoryFile implements ProductRepository {
 
@@ -75,10 +74,9 @@ public class ProductRepositoryFile implements ProductRepository {
     @Override
     public BigDecimal calculateSumOfPrices(List<Product> products) {
 
-        BigDecimal sum = products.stream()
+        return products.stream()
                 .map(Product::getPrice)
                 .peek(price -> System.out.println("Individual price: " + price))
                 .reduce(BigDecimal.ZERO, BigDecimal::add);
-        return  sum;
     }
 }

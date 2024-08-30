@@ -23,13 +23,11 @@ public class ProductReader {
             String line;
             while ((line = reader.readLine()) != null) {
                 String name = line.substring(0, 100).trim();
-                String pricePart = line.substring(100, 110);
-                int lastNonSpaceIndex = pricePart.lastIndexOf(' ') + 1;
-                String price = pricePart.substring(lastNonSpaceIndex).trim();
+                String pricePart = line.substring(100, 110).trim();
                 String currency = line.substring(110, 120).trim();
                 String score = line.substring(120).trim();
 
-                Product product = new Product(name, new BigDecimal(price), currency, Integer.parseInt(score));
+                Product product = new Product(name, new BigDecimal(pricePart), currency, Integer.parseInt(score));
                 products.add(product);
             }
 

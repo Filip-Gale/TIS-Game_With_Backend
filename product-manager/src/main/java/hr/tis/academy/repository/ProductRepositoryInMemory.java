@@ -6,12 +6,10 @@ import hr.tis.academy.repository.exception.NoProductFoundException;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
-import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
 import java.util.Optional;
-import java.util.stream.Collectors;
 
 public class ProductRepositoryInMemory implements  ProductRepository{
 
@@ -21,7 +19,6 @@ public class ProductRepositoryInMemory implements  ProductRepository{
     public Long insertProducts(ProductsMetadata productsMetadata) {
 
         productsMetadataList.add(productsMetadata);
-        //System.out.println("(long)productsMetadataList.size() " + (long)productsMetadataList.size());
         productsMetadata.setId((long)productsMetadataList.size());
 
         return productsMetadata.getId();

@@ -1,14 +1,11 @@
 package hr.tis.academy.file;
 
-import hr.tis.academy.model.Product;
 import hr.tis.academy.model.ProductsMetadata;
 
 import java.io.BufferedWriter;
-import java.io.File;
-import java.io.FileWriter;
 import java.io.IOException;
 import java.nio.file.Files;
-import java.nio.file.Path;
+import java.text.DecimalFormat;
 
 public class ProductWriter {
     public static void writeProducts(ProductsMetadata productsMetadata) {
@@ -21,9 +18,9 @@ public class ProductWriter {
                 FileSystemConfiguration.PRODUCTS_FILES_FOLDER_PATH.resolve(filename))) {
 
             productsMetadata.getProducts().forEach(product -> {
-                String formattedString = String.format("%-100s%10s%-10s%d",
+                String formattedString = String.format("%-100s%10s%-10s%d" ,
                         product.getName(),
-                        product.getPrice(),
+                        new DecimalFormat("0.00").format(product.getPrice()),
                         product.getCurrency(),
                         product.getScore());
                 try {
