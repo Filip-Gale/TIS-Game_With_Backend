@@ -1,9 +1,9 @@
 package hr.tis.academy.model;
 
+import hr.tis.academy.repository.ProductRepositoryInMemory;
+
 import java.math.BigDecimal;
-import java.text.DecimalFormat;
 import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -12,10 +12,6 @@ public class ProductsMetadata {
   private LocalDateTime creationDateTime;
   private String title;
   private List<Product> products;
-
-  public ProductsMetadata() {
-    this.creationDateTime = LocalDateTime.now();
-  }
 
   public Long getId() {
     return id;
@@ -57,18 +53,26 @@ public class ProductsMetadata {
   }
 
   public static void main(String[] args) {
-    ProductsMetadata productsMetadata = new ProductsMetadata();
-    List<Product> products = new ArrayList<>();
-    products.add(new Product("Majica", new BigDecimal(12.99), "EUR", 2));
-    products.add(new Product("Haljina", new BigDecimal(30.99), "EUR", 5));
-    productsMetadata.setProducts(products);
-    System.out.println(productsMetadata);
-  }
+    ArrayList<Product> products = new ArrayList<>();
+    ArrayList<Product> products2 = new ArrayList<>();
 
-  @Override
-  public String toString() {
-    DateTimeFormatter myFormatObj = DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm:ss");
+    products.add(new Product("lol", BigDecimal.valueOf(1),"r",3));
+    products.add(new Product("lol2",BigDecimal.valueOf(12),"r2",4));
 
-    return "ProductsMetadata{" + "id=" + id + ", creationDateTime=" + creationDateTime.format(myFormatObj) + ", title='" + title + '\'' + ", products=" + products + '}';
+    products2.add(new Product("lol",BigDecimal.valueOf(1),"r",3));
+    products2.add(new Product("lol2",BigDecimal.valueOf(15),"r2",4));
+
+    ProductsMetadata p = new ProductsMetadata(null, LocalDateTime.now(),"yay",products);
+    ProductsMetadata p2 = new ProductsMetadata(null, LocalDateTime.now(),"yay2",products2);
+
+
+
+
+    ProductRepositoryInMemory prim = new ProductRepositoryInMemory();
+
+    prim.insertProducts(p);
+    prim.insertProducts(p2);
+
+    System.out.println( prim.calculateSumOfPrices(p.getProducts()));
   }
 }
