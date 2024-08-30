@@ -1,5 +1,7 @@
 package hr.tis.academy.model;
 
+import hr.tis.academy.repository.ProductRepository;
+import hr.tis.academy.repository.ProductRepositoryDB;
 import hr.tis.academy.repository.ProductRepositoryInMemory;
 
 import java.math.BigDecimal;
@@ -65,14 +67,15 @@ public class ProductsMetadata {
     ProductsMetadata p = new ProductsMetadata(null, LocalDateTime.now(),"yay",products);
     ProductsMetadata p2 = new ProductsMetadata(null, LocalDateTime.now(),"yay2",products2);
 
-
-
-
     ProductRepositoryInMemory prim = new ProductRepositoryInMemory();
 
     prim.insertProducts(p);
     prim.insertProducts(p2);
 
-    System.out.println( prim.calculateSumOfPrices(p.getProducts()));
+    ProductRepository prdb = new ProductRepositoryDB();
+
+    prdb.insertProducts(p);
+    prdb.insertProducts(p2);
+    System.out.println( prdb.fetchSumOfPrices(p.getCreationDateTime().toLocalDate()));
   }
 }
