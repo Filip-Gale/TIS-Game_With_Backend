@@ -3,6 +3,8 @@ package hr.tis.academy.repository;
 import hr.tis.academy.db.Database;
 import hr.tis.academy.model.Product;
 import hr.tis.academy.model.ProductsMetadata;
+import org.springframework.context.annotation.Profile;
+import org.springframework.stereotype.Component;
 
 import java.math.BigDecimal;
 import java.sql.*;
@@ -11,6 +13,8 @@ import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.List;
 
+@Component
+@Profile("db")
 public class ProductRepositoryDB implements ProductRepository {
 
   @Override

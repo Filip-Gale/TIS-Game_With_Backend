@@ -2,6 +2,7 @@ package hr.tis.academy;
 
 import hr.tis.academy.repository.ProductRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.boot.ApplicationRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -26,8 +27,8 @@ public class App {
             Arrays.stream(applicationContext.getBeanDefinitionNames())
                     .forEach(System.out::println);
 
-            ProductRepository productRepositoryInMemory = (ProductRepository) applicationContext.getBean("myProductRepositoryInMemory");
-            System.out.println("productRepositoryInMemory " + productRepositoryInMemory.fetchProductsMetadataCount());
+            //ProductRepository productRepositoryInMemory = (ProductRepository) applicationContext.getBean("productRepositoryFile");
+            System.out.println("productRepository " + productRepository.fetchProductsMetadataCount());
 
             System.out.println("AAA " + productRepository.fetchProductsMetadataCount());
         };

@@ -2,20 +2,36 @@ package hr.tis.academy.file;
 
 import hr.tis.academy.model.Product;
 import hr.tis.academy.model.ProductsMetadata;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.stereotype.Component;
 
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.math.BigDecimal;
 import java.nio.file.Files;
+import java.nio.file.Path;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 
+@Component
 public class ProductReader {
+    /* private final Path filePath;
+
+    @Autowired
+    public ProductReader(@Qualifier("getPath") Path filePath) {
+        this.filePath = filePath;
+    }
+    public  ProductsMetadata read(String fileName) {*/
+    @Autowired
+    @Qualifier("getPath")
+    private static Path filePath;
+
     public static ProductsMetadata read(String fileName) {
         try (BufferedReader reader =
-                     Files.newBufferedReader(FileSystemConfiguration.PRODUCTS_FILES_FOLDER_PATH.resolve(fileName)))
+                     Files.newBufferedReader(filePath.resolve(fileName)))
         {
 
             List<Product> products = new ArrayList<>();

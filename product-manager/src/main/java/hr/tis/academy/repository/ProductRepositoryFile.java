@@ -6,15 +6,25 @@ import hr.tis.academy.file.ProductWriter;
 import hr.tis.academy.model.Product;
 import hr.tis.academy.model.ProductsMetadata;
 import hr.tis.academy.repository.exception.NoProductFoundException;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.context.annotation.Profile;
+import org.springframework.stereotype.Component;
 
 import java.io.File;
 import java.math.BigDecimal;
+import java.nio.file.Path;
 import java.time.LocalDate;
 import java.util.*;
 
+@Component
+@Profile("file")
 public class ProductRepositoryFile implements ProductRepository {
+    @Autowired
+    @Qualifier("getPath")
+    private Path filePath;
 
-    private final File directory = FileSystemConfiguration.PRODUCTS_FILES_FOLDER_PATH.toFile();
+    private final File directory = filePath.toFile();
 
     @Override
     public Long insertProducts(ProductsMetadata productsMetadata) {

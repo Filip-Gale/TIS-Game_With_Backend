@@ -1,5 +1,7 @@
 package hr.tis.academy.model;
 
+import org.springframework.stereotype.Component;
+
 import java.math.BigDecimal;
 import java.text.DecimalFormat;
 import java.text.NumberFormat;

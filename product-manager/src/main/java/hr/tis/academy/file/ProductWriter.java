@@ -1,21 +1,30 @@
 package hr.tis.academy.file;
 
 import hr.tis.academy.model.ProductsMetadata;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.stereotype.Component;
 
 import java.io.BufferedWriter;
 import java.io.IOException;
 import java.nio.file.Files;
+import java.nio.file.Path;
 import java.text.DecimalFormat;
 
+@Component
 public class ProductWriter {
+    @Autowired
+    @Qualifier("getPath")
+    private static Path filePath;
     public static void writeProducts(ProductsMetadata productsMetadata) {
         String string = "%d_%s_%s.txt";
         String creationTimeRefactored = String.valueOf(productsMetadata.getCreationDateTime()).replace(":", "$");
         String filename = String.format(string, productsMetadata.getId(), creationTimeRefactored,
                 productsMetadata.getTitle());
 
+
         try (BufferedWriter writer = Files.newBufferedWriter(
-                FileSystemConfiguration.PRODUCTS_FILES_FOLDER_PATH.resolve(filename))) {
+                filePath.resolve(filename))) {
 
             productsMetadata.getProducts().forEach(product -> {
                 String formattedString = String.format("%-100s%10s%-10s%d" ,
