@@ -1,0 +1,75 @@
+### Get all stores
+GET http://localhost:9090/product_manager_paklenica/stores
+Accept: application/json
+
+### Get a store by ID
+GET http://localhost:9090/product_manager_paklenica/stores/1
+Accept: application/json
+
+### Add a new store
+POST http://localhost:9090/product_manager_paklenica/stores
+Content-Type: application/json
+
+{
+  "storeName": "New Store",
+  "address": {
+    "city": "San Francisco",
+    "country": "USA",
+    "streetName": "Market Street",
+    "houseNumber": "400"
+  },
+  "telephoneNumber": "01-567-8901",
+  "email": "info@newstore.com",
+  "workingDays": [
+    {
+      "dayOfWeek": "MONDAY",
+      "startTime": "09:00:00",
+      "endTime": "17:00:00"
+    },
+    {
+      "dayOfWeek": "TUESDAY",
+      "startTime": "09:00:00",
+      "endTime": "17:00:00"
+    }
+  ]
+}
+
+### Update a store by ID (full update)
+PUT http://localhost:9090/product_manager_paklenica/stores/1
+Content-Type: application/json
+
+{
+  "storeName": "Updated Store Name",
+  "address": {
+    "city": "San Jose",
+    "country": "USA",
+    "streetName": "Almaden Boulevard",
+    "houseNumber": "500"
+  },
+  "telephoneNumber": "01-678-9012",
+  "email": "info@updatedstore.com",
+  "workingDays": [
+    {
+      "dayOfWeek": "WEDNESDAY",
+      "startTime": "10:00:00",
+      "endTime": "18:00:00"
+    },
+    {
+      "dayOfWeek": "THURSDAY",
+      "startTime": "10:00:00",
+      "endTime": "18:00:00"
+    }
+  ]
+}
+
+### Partially update a store by ID
+PATCH http://localhost:9090/product_manager_paklenica/stores/1
+Content-Type: application/json
+
+{
+  "telephoneNumber": "01-999-9999",
+  "email": "info@partiallyupdatedstore.com"
+}
+
+### Delete a store by ID
+DELETE http://localhost:9090/product_manager_paklenica/stores/1
