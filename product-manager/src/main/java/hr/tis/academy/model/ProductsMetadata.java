@@ -1,21 +1,26 @@
 package hr.tis.academy.model;
 
+import hr.tis.academy.file.ProductReader;
+import hr.tis.academy.file.ProductWriter;
 import hr.tis.academy.repository.ProductRepository;
 import hr.tis.academy.repository.ProductRepositoryDB;
 import hr.tis.academy.repository.ProductRepositoryFile;
 import hr.tis.academy.repository.ProductRepositoryInMemory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.context.ApplicationContext;
 import org.springframework.stereotype.Component;
 
 import java.math.BigDecimal;
+import java.nio.file.Path;
 import java.text.DecimalFormat;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ProductsMetadata {
 
+public class ProductsMetadata {
   private Long id;
   private LocalDateTime creationDateTime;
   private String title;
@@ -85,13 +90,13 @@ public class ProductsMetadata {
 
     //System.out.println(ProductReader.read("1_2024-08-30T11$25$37.002657200_Lista 3.txt").getTitle());
 
-    ProductRepositoryFile prf = new ProductRepositoryFile();
+    /*ProductRepositoryFile prf = new ProductRepositoryFile();
     System.out.println("insertProducts(p3) " + prf.insertProducts(p3));
     System.out.println("fetchSumOfPrices(LocalDate.now()) " + prf.fetchSumOfPrices(LocalDate.now()));
     prf.fetchProductsMetadata(LocalDate.now());
     System.out.println("fetchSumOfPrices(1L); " + prf.fetchSumOfPrices(1L));
     System.out.println("fetchProductsMetadata " + prf.fetchProductsMetadata(1L));
-    System.out.println("fetchProductsMetadataCount " + prf.fetchProductsMetadataCount());
+    System.out.println("fetchProductsMetadataCount " + prf.fetchProductsMetadataCount());*/
 
     ProductRepository prdb = new ProductRepositoryDB();
 

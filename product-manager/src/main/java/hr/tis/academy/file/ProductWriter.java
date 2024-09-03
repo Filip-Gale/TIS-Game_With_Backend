@@ -13,10 +13,15 @@ import java.text.DecimalFormat;
 
 @Component
 public class ProductWriter {
+
+    private final Path filePath;
+
     @Autowired
-    @Qualifier("getPath")
-    private static Path filePath;
-    public static void writeProducts(ProductsMetadata productsMetadata) {
+    public ProductWriter(@Qualifier("getPath") Path filePath) {
+        this.filePath = filePath;
+    }
+
+    public void writeProducts(ProductsMetadata productsMetadata) {
         String string = "%d_%s_%s.txt";
         String creationTimeRefactored = String.valueOf(productsMetadata.getCreationDateTime()).replace(":", "$");
         String filename = String.format(string, productsMetadata.getId(), creationTimeRefactored,
@@ -27,7 +32,7 @@ public class ProductWriter {
                 filePath.resolve(filename))) {
 
             productsMetadata.getProducts().forEach(product -> {
-                String formattedString = String.format("%-100s%10s%-10s%d" ,
+                String formattedString = String.format("%-100s%10s%-10s%d",
                         product.getName(),
                         new DecimalFormat("0.00").format(product.getPrice()),
                         product.getCurrency(),

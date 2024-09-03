@@ -20,9 +20,18 @@ import java.util.*;
 @Component
 @Profile("file")
 public class ProductRepositoryFile implements ProductRepository {
-    @Autowired
-    @Qualifier("getPath")
     private Path filePath;
+    private final ProductReader productReader;
+    private final ProductWriter productWriter;
+
+    @Autowired
+    public ProductRepositoryFile(@Qualifier("getPath") Path filePath,
+                                 ProductReader productReader,
+                                 ProductWriter productWriter) {
+        this.filePath = filePath;
+        this.productReader = productReader;
+        this.productWriter = productWriter;
+    }
 
     private final File directory = filePath.toFile();
 
@@ -32,7 +41,7 @@ public class ProductRepositoryFile implements ProductRepository {
         long newId = Arrays.stream(Objects.requireNonNull(directory.listFiles()))
                 .count() + 1;
         productsMetadata.setId(newId);
-        ProductWriter.writeProducts(productsMetadata);
+        productWriter.writeProducts(productsMetadata);
 
         return productsMetadata.getId();
     }
@@ -47,7 +56,7 @@ public class ProductRepositoryFile implements ProductRepository {
     public BigDecimal fetchSumOfPrices(Long id) {
 
         Optional<ProductsMetadata> metadata = Arrays.stream(Objects.requireNonNull(directory.listFiles()))
-                .map(file -> ProductReader.read(file.getName()))
+                .map(file -> productReader.read(file.getName()))
                 .filter(pm -> pm.getId().equals(id))
                 .findFirst();
 
@@ -60,7 +69,7 @@ public class ProductRepositoryFile implements ProductRepository {
     @Override
     public ProductsMetadata fetchProductsMetadata(LocalDate createdDate) {
         return Arrays.stream(Objects.requireNonNull(directory.listFiles()))
-                .map(file -> ProductReader.read(file.getName()))
+                .map(file -> productReader.read(file.getName()))
                 .filter(pm -> pm.getCreationDateTime().toLocalDate().isEqual(createdDate))
                 .max(Comparator.comparing(ProductsMetadata::getCreationDateTime))
                 .orElseThrow(() -> new NoProductFoundException("No product found for " + createdDate));
@@ -69,7 +78,7 @@ public class ProductRepositoryFile implements ProductRepository {
     @Override
     public ProductsMetadata fetchProductsMetadata(Long id) {
         return Arrays.stream(Objects.requireNonNull(directory.listFiles()))
-                .map(file -> ProductReader.read(file.getName()))
+                .map(file -> productReader.read(file.getName()))
                 .filter(pm -> pm.getId().equals(id))
                 .findFirst()
                 .orElseThrow(() -> new NoSuchElementException("No ProductsMetadata found with id: " + id));

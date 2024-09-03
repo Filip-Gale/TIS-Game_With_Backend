@@ -18,21 +18,16 @@ import java.util.List;
 
 @Component
 public class ProductReader {
-    /* private final Path filePath;
+    private final Path filePath;
 
     @Autowired
     public ProductReader(@Qualifier("getPath") Path filePath) {
         this.filePath = filePath;
     }
-    public  ProductsMetadata read(String fileName) {*/
-    @Autowired
-    @Qualifier("getPath")
-    private static Path filePath;
 
-    public static ProductsMetadata read(String fileName) {
+    public ProductsMetadata read(String fileName) {
         try (BufferedReader reader =
-                     Files.newBufferedReader(filePath.resolve(fileName)))
-        {
+                     Files.newBufferedReader(filePath.resolve(fileName))) {
 
             List<Product> products = new ArrayList<>();
 

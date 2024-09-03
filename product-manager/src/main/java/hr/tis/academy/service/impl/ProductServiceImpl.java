@@ -14,15 +14,20 @@ import java.time.LocalDate;
 
 @Service
 public class ProductServiceImpl implements ProductService {
-    @Autowired
-    private final ProductRepository productRepository;
-    //private final WebScraper webScraper = new WebScraper();
-    @Autowired
+
+    private ProductRepository productRepository;
     private final WebScraper webScraper;
+
+    @Autowired
     public ProductServiceImpl(ProductRepository productRepository, WebScraper webScraper) {
         this.productRepository = productRepository;
         this.webScraper = webScraper;
     }
+    @Autowired
+    public void setProductRepository(ProductRepository productRepository) {
+        this.productRepository = productRepository;
+    }
+
     @Override
     public ProductsMetadata fetchProductsFromWeb() {
         return webScraper.fetchProducts();

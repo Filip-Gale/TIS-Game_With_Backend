@@ -17,7 +17,7 @@ public class App {
         SpringApplication.run(App.class, args);
     }
 
-    @Autowired
+/*    @Autowired
     private ApplicationContext applicationContext;
     @Autowired
     private ProductRepository productRepository;
@@ -27,10 +27,11 @@ public class App {
             Arrays.stream(applicationContext.getBeanDefinitionNames())
                     .forEach(System.out::println);
 
-            //ProductRepository productRepositoryInMemory = (ProductRepository) applicationContext.getBean("productRepositoryFile");
+
+            ProductRepository productRepositoryInMemory = (ProductRepository) applicationContext.getBean("productRepositoryFile");
             System.out.println("productRepository " + productRepository.fetchProductsMetadataCount());
 
             System.out.println("AAA " + productRepository.fetchProductsMetadataCount());
         };
-    }
+    }*/
 }
