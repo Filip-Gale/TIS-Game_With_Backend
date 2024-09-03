@@ -13,4 +13,8 @@ public class FileSystemConfiguration {
     public Path getPath() {
         return Path.of(filePath);
     }
+
+    public Path getPath(String filePath) {
+        return Path.of(filePath);
+    }
 }

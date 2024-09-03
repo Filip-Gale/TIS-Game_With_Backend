@@ -14,7 +14,6 @@ import java.util.Comparator;
 import java.util.List;
 import java.util.Optional;
 
-//@Component("myProductRepositoryInMemory")
 @Component
 @Profile("memory")
 public class ProductRepositoryInMemory implements  ProductRepository{

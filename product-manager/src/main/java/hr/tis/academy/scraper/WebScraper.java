@@ -38,11 +38,11 @@ public class WebScraper {
                 pageTitle = doc.title();
                 Elements paragraphs = doc.getElementsByClass("product-wrapper");
                 for (Element paragraph : paragraphs) {
-                    String title = paragraph.getElementsByClass("product-default__title") .getFirst().child(0).text();
-                    Long rating = paragraph.getElementsByClass("stars").getFirst().getElementsByClass("is-active").stream().count();
-                    String priceEur = paragraph.getElementsByClass("price--kn").getFirst().text();
-                    String priceCent = paragraph.getElementsByClass("price--li").getFirst().text();
-                    String byPiece = paragraph.getElementsByClass("price--c").getFirst().text();
+                    String title = paragraph.getElementsByClass("product-default__title") .first().child(0).text();
+                    Long rating = paragraph.getElementsByClass("stars").first().getElementsByClass("is-active").stream().count();
+                    String priceEur = paragraph.getElementsByClass("price--kn").first().text();
+                    String priceCent = paragraph.getElementsByClass("price--li").first().text();
+                    String byPiece = paragraph.getElementsByClass("price--c").first().text();
 
                     BigDecimal priceEurDecimal = new BigDecimal(priceEur);
                     BigDecimal priceCentDecimal = new BigDecimal(priceCent).divide(new BigDecimal(100));
