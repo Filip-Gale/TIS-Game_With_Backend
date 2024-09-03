@@ -17,12 +17,12 @@ public class ProductController {
     @Autowired
     public ProductController(ProductService productService) {this.productService = productService;}
 
-    @GetMapping
+    @GetMapping("/fetch")
     public ProductsMetadataDto fetchProductsFromWeb(){return productService.fetchProductsFromWeb();}
 
-    @GetMapping
+    @GetMapping("/save")
     public ProductsMetadataDto saveProductsFromWeb(){return productService.saveProductsFromWeb();}
 
-    @GetMapping
+    @GetMapping("/getDate")
     public ProductsMetadataDto getProductsForDate(LocalDate date){return productService.getProductsForDate(date);}
 }
