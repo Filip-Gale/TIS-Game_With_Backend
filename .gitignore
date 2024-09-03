@@ -1,3 +1,7 @@
+/.idea
+/product-manager/target
+/product-manager/.idea
+/.idea/
 
 ### Projektni direktoriji ###
 /product-manager/db/

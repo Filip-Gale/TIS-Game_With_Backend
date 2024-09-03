@@ -2,7 +2,6 @@ package hr.tis.academy.service.impl;
 
 import hr.tis.academy.model.ProductsMetadata;
 import hr.tis.academy.repository.ProductRepository;
-import hr.tis.academy.repository.ProductRepositoryInMemory;
 import hr.tis.academy.scraper.WebScraper;
 import hr.tis.academy.service.ProductService;
 import org.hibernate.annotations.CollectionTypeRegistration;

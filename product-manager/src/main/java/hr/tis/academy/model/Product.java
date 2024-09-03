@@ -4,7 +4,6 @@ import org.springframework.stereotype.Component;
 
 import java.math.BigDecimal;
 import java.text.DecimalFormat;
-import java.text.NumberFormat;
 
 public class Product {
 
@@ -12,11 +11,6 @@ public class Product {
   private BigDecimal price;
   private String currency;
   private int score;
-
-
-  public Product() {
-    this.score = 0;
-  }
 
   public int getScore() {
     return score;
