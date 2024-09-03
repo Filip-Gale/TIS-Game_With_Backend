@@ -1,5 +1,7 @@
 package hr.tis.academy.service.impl;
 
+import hr.tis.academy.dto.ProductsMetadataDto;
+import hr.tis.academy.mappers.ProductsMetadataMapper;
 import hr.tis.academy.model.ProductsMetadata;
 import hr.tis.academy.repository.ProductRepository;
 import hr.tis.academy.repository.ProductRepositoryInMemory;
@@ -16,27 +18,29 @@ import java.time.LocalDate;
 public class ProductServiceImpl implements ProductService {
     @Autowired
     private final ProductRepository productRepository;
+    private final ProductsMetadataMapper productsMetadataMapper;
     //private final WebScraper webScraper = new WebScraper();
     @Autowired
     private final WebScraper webScraper;
-    public ProductServiceImpl(ProductRepository productRepository, WebScraper webScraper) {
+    public ProductServiceImpl(ProductRepository productRepository, ProductsMetadataMapper productsMetadataMapper, WebScraper webScraper) {
         this.productRepository = productRepository;
+        this.productsMetadataMapper = productsMetadataMapper;
         this.webScraper = webScraper;
     }
     @Override
-    public ProductsMetadata fetchProductsFromWeb() {
-        return webScraper.fetchProducts();
+    public ProductsMetadataDto fetchProductsFromWeb() {
+        return productsMetadataMapper.toDto(webScraper.fetchProducts());
     }
 
     @Override
-    public ProductsMetadata saveProductsFromWeb() {
+    public ProductsMetadataDto saveProductsFromWeb() {
         ProductsMetadata productsMetadata = webScraper.fetchProducts();
         productRepository.insertProducts(productsMetadata);
         return null;
     }
 
     @Override
-    public ProductsMetadata getProductsForDate(LocalDate date) {
-        return productRepository.fetchProductsMetadata(date);
+    public ProductsMetadataDto getProductsForDate(LocalDate date) {
+        return productsMetadataMapper.toDto(productRepository.fetchProductsMetadata(date));
     }
 }

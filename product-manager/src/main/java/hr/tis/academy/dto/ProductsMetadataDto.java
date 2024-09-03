@@ -12,6 +12,13 @@ public class ProductsMetadataDto {
     private String title;
     private List<Product> products;
 
+    public ProductsMetadataDto(Long id, LocalDateTime creationDateTime, String title, List<Product> products) {
+        this.id = id;
+        this.creationDateTime = creationDateTime;
+        this.title = title;
+        this.products = products;
+    }
+
     public Long getId() {
         return id;
     }

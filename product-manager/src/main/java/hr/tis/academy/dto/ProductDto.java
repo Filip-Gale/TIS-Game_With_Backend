@@ -2,12 +2,19 @@ package hr.tis.academy.dto;
 
 import java.math.BigDecimal;
 
-public class ProductsDto {
+public class ProductDto {
 
     private String name;
     private BigDecimal price;
     private String currency;
     private int score;
+
+    public ProductDto(String name, BigDecimal price, String currency, int score) {
+        this.name = name;
+        this.price = price;
+        this.currency = currency;
+        this.score = score;
+    }
 
     public int getScore() {
         return score;
