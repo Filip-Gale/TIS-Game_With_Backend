@@ -1,7 +1,10 @@
 package hr.tis.academy.service.impl;
 
+import hr.tis.academy.dto.ProductsMetadataDto;
+import hr.tis.academy.mappers.ProductsMetadataMapper;
 import hr.tis.academy.model.ProductsMetadata;
 import hr.tis.academy.repository.ProductRepository;
+import hr.tis.academy.repository.ProductRepositoryInMemory;
 import hr.tis.academy.scraper.WebScraper;
 import hr.tis.academy.service.ProductService;
 import org.hibernate.annotations.CollectionTypeRegistration;
@@ -14,33 +17,30 @@ import java.time.LocalDate;
 @Service
 public class ProductServiceImpl implements ProductService {
 
-    private ProductRepository productRepository;
+    private final ProductRepository productRepository;
+    private final ProductsMetadataMapper productsMetadataMapper;
     private final WebScraper webScraper;
 
     @Autowired
-    public ProductServiceImpl(ProductRepository productRepository, WebScraper webScraper) {
+    public ProductServiceImpl(ProductRepository productRepository, ProductsMetadataMapper productsMetadataMapper, WebScraper webScraper) {
         this.productRepository = productRepository;
+        this.productsMetadataMapper = productsMetadataMapper;
         this.webScraper = webScraper;
     }
-    @Autowired
-    public void setProductRepository(ProductRepository productRepository) {
-        this.productRepository = productRepository;
+    @Override
+    public ProductsMetadataDto fetchProductsFromWeb() {
+        return productsMetadataMapper.toDto(webScraper.fetchProducts());
     }
 
     @Override
-    public ProductsMetadata fetchProductsFromWeb() {
-        return webScraper.fetchProducts();
-    }
-
-    @Override
-    public ProductsMetadata saveProductsFromWeb() {
+    public ProductsMetadataDto saveProductsFromWeb() {
         ProductsMetadata productsMetadata = webScraper.fetchProducts();
         productRepository.insertProducts(productsMetadata);
         return null;
     }
 
     @Override
-    public ProductsMetadata getProductsForDate(LocalDate date) {
-        return productRepository.fetchProductsMetadata(date);
+    public ProductsMetadataDto getProductsForDate(LocalDate date) {
+        return productsMetadataMapper.toDto(productRepository.fetchProductsMetadata(date));
     }
 }
