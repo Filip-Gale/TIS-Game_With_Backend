@@ -1,22 +1,36 @@
-package hr.tis.academy.dto;
+package hr.tis.academy.model;
 
-import hr.tis.academy.model.Address;
-import hr.tis.academy.model.WorkingDay;
+import hr.tis.academy.dto.AddressDto;
+import hr.tis.academy.dto.WorkingDayDto;
+import jakarta.persistence.*;
 
+import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
-public class StoreDto {
+@Entity
+@Table(name = "STORE", schema = "PRODUCT_MANAGER")
+public class Store{
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private  Long id;
+    @Column
     private  String storeName;
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "address_id", referencedColumnName = "id")
     private Address address;
+    @Column
     private  String telephoneNumber;
+    @Column
     private String email;
-    private List<WorkingDay> workingDays;
+    @OneToMany(mappedBy = "store", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    private List<WorkingDay> workingDays = new ArrayList<>();
 
-    public StoreDto() {}
+    public Store(){}
 
-    public StoreDto(Long id, String storeName, Address address, String telephoneNumber, String email, List<WorkingDay> workingDays) {
-        this.id = id;
+    public Store(String storeName, Address address, String telephoneNumber, String email, List<WorkingDay> workingDays) {
         this.storeName = storeName;
         this.address = address;
         this.telephoneNumber = telephoneNumber;
@@ -26,10 +40,6 @@ public class StoreDto {
 
     public Long getId() {
         return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
     }
 
     public String getStoreName() {

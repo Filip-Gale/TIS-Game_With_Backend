@@ -1,6 +1,5 @@
 package hr.tis.academy.repository;
 
-import hr.tis.academy.file.FileSystemConfiguration;
 import hr.tis.academy.file.ProductReader;
 import hr.tis.academy.file.ProductWriter;
 import hr.tis.academy.model.Product;
@@ -97,5 +96,8 @@ public class ProductRepositoryFile implements ProductRepository {
                 .map(Product::getPrice)
                 .peek(price -> System.out.println("Individual price: " + price))
                 .reduce(BigDecimal.ZERO, BigDecimal::add);
+    }
+
+    public static class StoreRepository {
     }
 }

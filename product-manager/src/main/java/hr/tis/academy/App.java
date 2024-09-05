@@ -2,10 +2,7 @@ package hr.tis.academy;
 
 import hr.tis.academy.model.Product;
 import hr.tis.academy.model.ProductsMetadata;
-import hr.tis.academy.repository.ProductRepository;
-import hr.tis.academy.repository.ProductRepositoryInMemory;
-import hr.tis.academy.repository.ProductRepositoryJPA;
-import hr.tis.academy.repository.ProductsMetadataRepository;
+import hr.tis.academy.repository.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.boot.ApplicationRunner;
@@ -55,10 +52,12 @@ public class App {
 
     private final ProductsMetadataRepository productsMetadataRepository;
     private final ProductRepositoryJPA productRepositoryJPA;
+    private  final StoreRepository storeRepository;
     @Autowired
-    public App(ProductsMetadataRepository productsMetadataRepository, ProductRepositoryJPA productRepositoryJPA) {
+    public App(ProductsMetadataRepository productsMetadataRepository, ProductRepositoryJPA productRepositoryJPA, StoreRepository storeRepository) {
         this.productsMetadataRepository = productsMetadataRepository;
         this.productRepositoryJPA = productRepositoryJPA;
+        this.storeRepository = storeRepository;
     }
 
     @Bean
@@ -104,6 +103,7 @@ public class App {
                 System.out.println("Nije pronaslo.");
             }
             */
+           /*
             //f)
             var avg = productRepositoryJPA.getAverageScoreJPQL(15L);
             System.out.println("avg  " + avg);
@@ -114,8 +114,9 @@ public class App {
             for (ProductsMetadata productsMetadata : lista) {
                 System.out.println("productsMetadata: " + productsMetadata);
             }
-
-
+*/
+            //2 c)
+            System.out.println("Fetch store by email: " + storeRepository.fetchStoreRecord("info@seveneleven.com").getStoreName());
         };
     }
 
