@@ -18,7 +18,7 @@ public class StoreController {
 
     @GetMapping("/{id}")
     public StoreDto getStoreById(@PathVariable long id) {
-        return storeService.gerStorebyId(id);
+        return storeService.getStorebyId(id);
     }
 
     @GetMapping

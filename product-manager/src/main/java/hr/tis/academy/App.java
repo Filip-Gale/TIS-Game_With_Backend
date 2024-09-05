@@ -1,7 +1,8 @@
 package hr.tis.academy;
 
-import hr.tis.academy.model.Product;
-import hr.tis.academy.model.ProductsMetadata;
+import hr.tis.academy.controller.StoreServiceImpl;
+import hr.tis.academy.dto.StoreDto;
+import hr.tis.academy.model.*;
 import hr.tis.academy.repository.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -18,6 +19,7 @@ import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.time.temporal.ChronoUnit;
 import java.util.Arrays;
+import java.util.List;
 
 @SpringBootApplication
 public class App {
@@ -117,6 +119,43 @@ public class App {
 */
             //2 c)
             System.out.println("Fetch store by email: " + storeRepository.fetchStoreRecord("info@seveneleven.com").getStoreName());
+            System.out.println("Fetch by id: "+ storeRepository.findById(1L).get().getStoreName());
+
+            StoreServiceImpl storeService = new StoreServiceImpl(storeRepository);
+
+
+            System.out.println("get store by id: " + storeService.getStorebyId(1L).getStoreName());
+            /*System.out.println("add store: " + storeService.addStore(
+                    new StoreDto(
+                            "MegaMart",
+                            new Address("Los Angeles", "USA", "Sunset Boulevard", "202"),
+                            "01-345-6789",
+                            "info@megamart.com",
+                            List.of(
+                                    new WorkingDay(3L,"WEDNESDAY", LocalTime.of(10, 0), LocalTime.of(18, 0)),
+                                    new WorkingDay(4L,"THURSDAY", LocalTime.of(10, 0), LocalTime.of(18, 0))
+                            )
+                    )
+            ));*/
+
+            /*System.out.println("update: " + storeService.updateStore(2L, new StoreDto(
+                            "MegaMart2",
+                            new Address("Los Angeles", "USA", "Sunset Boulevard", "202"),
+                            "01-345-6789",
+                            "info@megamart.com",
+                            List.of(
+                                    new WorkingDay(null,"WEDNESDAY", LocalTime.of(10, 0), LocalTime.of(18, 0)),
+                                    new WorkingDay(null,"THURSDAY", LocalTime.of(10, 0), LocalTime.of(18, 0))
+                            )
+                    )
+            ));*/
+
+            //storeService.deleteStore(2L);
+            storeService.partialUpdateStore(1L, new StoreDto("9-11", null, null, null, null));
+            System.out.println("get all stores: \n");
+            for (StoreDto storeDto : storeService.getAllStores()) {
+                System.out.println(storeDto.getStoreName());
+            }
         };
     }
 

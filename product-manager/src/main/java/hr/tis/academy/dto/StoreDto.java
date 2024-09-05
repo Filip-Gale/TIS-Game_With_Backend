@@ -24,6 +24,14 @@ public class StoreDto {
         this.workingDays = workingDays;
     }
 
+    public StoreDto(String storeName, Address address, String telephoneNumber, String email, List<WorkingDay> workingDays) {
+        this.storeName = storeName;
+        this.address = address;
+        this.telephoneNumber = telephoneNumber;
+        this.email = email;
+        this.workingDays = workingDays;
+    }
+
     public Long getId() {
         return id;
     }

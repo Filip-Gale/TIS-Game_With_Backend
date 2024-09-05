@@ -25,7 +25,7 @@ public class Store{
     private  String telephoneNumber;
     @Column
     private String email;
-    @OneToMany(mappedBy = "store", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @OneToMany(mappedBy = "store", fetch = FetchType.EAGER)
     private List<WorkingDay> workingDays = new ArrayList<>();
 
     public Store(){}

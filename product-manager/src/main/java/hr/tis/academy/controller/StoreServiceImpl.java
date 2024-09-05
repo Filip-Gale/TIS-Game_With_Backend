@@ -1,14 +1,9 @@
 package hr.tis.academy.controller;
 
-import hr.tis.academy.dto.AddressDto;
 import hr.tis.academy.dto.StoreDto;
-import hr.tis.academy.dto.WorkingDayDto;
 import hr.tis.academy.model.Address;
-import hr.tis.academy.model.ProductsMetadata;
 import hr.tis.academy.model.Store;
 import hr.tis.academy.model.WorkingDay;
-import hr.tis.academy.repository.ProductRepository;
-import hr.tis.academy.repository.ProductsMetadataRepository;
 import hr.tis.academy.repository.StoreRepository;
 import jakarta.annotation.PostConstruct;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,9 +11,7 @@ import org.springframework.stereotype.Service;
 
 import java.time.LocalTime;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 @Service
 public class StoreServiceImpl implements StoreService {
@@ -33,7 +26,8 @@ public class StoreServiceImpl implements StoreService {
     }
     @PostConstruct
     public void init() {
-        WorkingDay workingDay = new WorkingDay("MONDAY", LocalTime.of(9, 0), LocalTime.of(17, 0));
+        WorkingDay monday = new WorkingDay("MONDAY", LocalTime.of(9, 0), LocalTime.of(17, 0));
+        WorkingDay tuesday = new WorkingDay("TUESDAY", LocalTime.of(9, 0), LocalTime.of(17, 0));
 
         Store store = new Store(
                 "7-eleven",
@@ -41,11 +35,12 @@ public class StoreServiceImpl implements StoreService {
                 "01-234-567-8900",
                 "info@seveneleven.com",
                 List.of(
-                        new WorkingDay("MONDAY", LocalTime.of(9, 0), LocalTime.of(17, 0)),
-                        new WorkingDay("TUESDAY", LocalTime.of(9, 0), LocalTime.of(17, 0))
+                        monday, tuesday
                 )
         );
-        storeRepository.save(store);
+        monday.setStore(store);
+        tuesday.setStore(store);
+//        storeRepository.save(store);
 /*
         storeRepository.save(new Store(
                 "MegaMart",
@@ -80,7 +75,7 @@ public class StoreServiceImpl implements StoreService {
     }
 
     @Override
-    public StoreDto gerStorebyId(Long id) {
+    public StoreDto getStorebyId(Long id) {
         Store s = storeRepository.findById(id).get();
         return storeToStoreDTO(s);
     }
@@ -130,9 +125,6 @@ public class StoreServiceImpl implements StoreService {
     public StoreDto partialUpdateStore(Long id, StoreDto store) {
         //StoreDto existingStore = storeMap.get(id);
         Store existingStore = storeRepository.findById(id).get();
-        if(storeRepository.findById(id).isPresent()){
-            return null;
-        }
         if(store.getStoreName() != null){
             existingStore.setStoreName(store.getStoreName());
         }
