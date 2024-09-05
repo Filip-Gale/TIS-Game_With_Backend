@@ -18,8 +18,6 @@ public class Position implements Serializable {
     private Title title;
     @Enumerated(EnumType.STRING)
     private Level level;
-    @OneToMany(mappedBy = "position", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-    private List<Employee> employees = new ArrayList<>();
 
     public Long getId() {
         return id;
@@ -45,11 +43,4 @@ public class Position implements Serializable {
         this.level = level;
     }
 
-    public List<Employee> getEmployees() {
-        return employees;
-    }
-
-    public void setEmployees(List<Employee> employees) {
-        this.employees = employees;
-    }
 }

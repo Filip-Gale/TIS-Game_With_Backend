@@ -1,0 +1,64 @@
+### Get all employees
+GET http://localhost:9090/product_manager_paklenica/employees/fetch
+Accept: application/json
+
+### Get a employee by ID
+GET http://localhost:9090/product_manager_paklenica/employees/fetch/1
+Accept: application/json
+
+### Add a new employee
+POST http://localhost:9090/product_manager_paklenica/employees
+Content-Type: application/json
+
+{
+  "first_name": "Pero",
+  "last_name": "Peric",
+  "date_of_birth": "2001-08-24",
+  "oib": "58267502725",
+  "starting_work_date": "2024-02-15",
+  "salary": 1520.24,
+  "vacation_days": 20,
+  "position": {
+    "id": 1,
+    "level": "JUNIOR",
+    "title": "CLERK"
+  }
+}
+
+### Add a new employee
+POST http://localhost:9090/product_manager_paklenica/employees
+Content-Type: application/json
+
+{
+  "first_name": "Ivan",
+  "last_name": "Ivanovic",
+  "date_of_birth": "2003-05-12",
+  "oib": "85672124921",
+  "starting_work_date": "2023-05-21",
+  "salary": 1716.65,
+  "vacation_days": 25,
+  "position": {
+    "id": 1,
+    "level": "MID",
+    "title": "MANAGER"
+  }
+}
+
+### Delete a store by ID
+DELETE http://localhost:9090/product_manager_paklenica/employees/2
+
+### GET a store by name or & date
+GET http://localhost:9090/product_manager_paklenica/employees/fetchByNameOrDate?first_name=Pero&starting_work_date=2024-02-15
+Content-Type: application/json
+
+### GET a store by name or no date
+GET http://localhost:9090/product_manager_paklenica/employees/fetchByNameOrDate?first_name=Pero&starting_work_date=
+Content-Type: application/json
+
+### GET a store by no name or broken date
+GET http://localhost:9090/product_manager_paklenica/employees/fetchByNameOrDate?first_name=Pero&starting_work_date=testcrash
+Content-Type: application/json
+
+### GET a store by no name or date
+GET http://localhost:9090/product_manager_paklenica/employees/fetchByNameOrDate?first_name=&starting_work_date=2024-02-15
+Content-Type: application/json

@@ -28,12 +28,12 @@ public class EmployeeServiceImpl implements EmployeeService {
   }
 
   @Override
-  public Employee insertEmployee(String oib, Date date_of_birth, String first_name, String last_name, double salary, Date starting_work_date, int vacation_days, Long position_id) {
+  public Integer insertEmployee(String oib, Date date_of_birth, String first_name, String last_name, double salary, Date starting_work_date, int vacation_days, Long position_id) {
     return employeeRepository.insertEmployee(oib, date_of_birth, first_name, last_name, salary, starting_work_date, vacation_days, position_id);
   }
 
   @Override
-  public Employee deleteEmployeeById(Long id) {
+  public Integer deleteEmployeeById(Long id) {
     return employeeRepository.deleteEmployeeById(id);
   }
 

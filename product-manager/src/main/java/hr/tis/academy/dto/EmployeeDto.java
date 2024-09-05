@@ -1,41 +1,27 @@
-package hr.tis.academy.model;
+package hr.tis.academy.dto;
 
-import jakarta.persistence.*;
+import hr.tis.academy.model.Position;
+import jakarta.persistence.Column;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
 
-import java.io.Serializable;
-import java.math.BigDecimal;
 import java.util.Date;
 
-@Entity
-@Table(name = "EMPLOYEE", schema = "PRODUCT_MANAGER")
-public class Employee implements Serializable {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
-    @Column
+public class EmployeeDto {
     private String first_name;
-    @Column
     private String last_name;
-    @Column
-    private java.sql.Date date_of_birth;
-    @Column(length = 11)
-    private String OIB;
-    @Column
-    private java.sql.Date starting_work_date;
-    @Column
+    private Date starting_work_date;
     private Double salary;
-    @Column
     private Integer vacation_days;
-    @ManyToOne
-    @JoinColumn(name = "POSITION_ID")
     private Position position;
 
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
+    public EmployeeDto(String first_name, String last_name, Date starting_work_date, Double salary, Integer vacation_days, Position position) {
+        this.first_name = first_name;
+        this.last_name = last_name;
+        this.starting_work_date = starting_work_date;
+        this.salary = salary;
+        this.vacation_days = vacation_days;
+        this.position = position;
     }
 
     public String getFirst_name() {
@@ -54,27 +40,11 @@ public class Employee implements Serializable {
         this.last_name = last_name;
     }
 
-    public Date getDate_of_birth() {
-        return date_of_birth;
-    }
-
-    public void setDate_of_birth(java.sql.Date date_of_birth) {
-        this.date_of_birth = date_of_birth;
-    }
-
-    public String getOIB() {
-        return OIB;
-    }
-
-    public void setOIB(String OIB) {
-        this.OIB = OIB;
-    }
-
     public Date getStarting_work_date() {
         return starting_work_date;
     }
 
-    public void setStarting_work_date(java.sql.Date starting_work_date) {
+    public void setStarting_work_date(Date starting_work_date) {
         this.starting_work_date = starting_work_date;
     }
 
