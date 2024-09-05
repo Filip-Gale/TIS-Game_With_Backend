@@ -1,5 +1,7 @@
 package hr.tis.academy.model;
 
+import hr.tis.academy.enums.Level;
+import hr.tis.academy.enums.Title;
 import jakarta.persistence.*;
 
 import java.io.Serializable;
@@ -11,5 +13,7 @@ public class Position implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     @Enumerated(EnumType.STRING)
-    private String title;
+    private Title title;
+    @Enumerated(EnumType.STRING)
+    private Level level;
 }
