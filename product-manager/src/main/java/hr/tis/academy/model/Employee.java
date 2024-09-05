@@ -26,4 +26,7 @@ public class Employee implements Serializable {
     private Double salary;
     @Column
     private Integer vacation_days;
+    @ManyToOne
+    @JoinColumn(name = "POSITION_ID")
+    private Position position;
 }
