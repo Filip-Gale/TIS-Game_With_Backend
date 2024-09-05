@@ -10,7 +10,7 @@ import java.util.Set;
 
 @Entity
 @Table(name = "WORKING_DAY",schema = "PRODUCT_MANAGER")
-public class WorkingDay implements Serializable {
+public class WorkingDay {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;

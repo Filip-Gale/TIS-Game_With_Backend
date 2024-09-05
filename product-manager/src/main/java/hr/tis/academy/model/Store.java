@@ -12,7 +12,7 @@ import java.util.Set;
 
 @Entity
 @Table(name = "STORE", schema = "PRODUCT_MANAGER")
-public class Store{
+public class Store {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private  Long id;
@@ -27,8 +27,19 @@ public class Store{
     private String email;
     @OneToMany(mappedBy = "store", fetch = FetchType.EAGER)
     private List<WorkingDay> workingDays = new ArrayList<>();
+    @OneToMany(mappedBy = "store", fetch = FetchType.EAGER)
+    private List<Employee> employees = new ArrayList<>();
 
     public Store(){}
+
+    public Store(String storeName, Address address, String telephoneNumber, String email, List<WorkingDay> workingDays, List<Employee> employees) {
+        this.storeName = storeName;
+        this.address = address;
+        this.telephoneNumber = telephoneNumber;
+        this.email = email;
+        this.workingDays = workingDays;
+        this.employees = employees;
+    }
 
     public Store(String storeName, Address address, String telephoneNumber, String email, List<WorkingDay> workingDays) {
         this.storeName = storeName;
@@ -80,5 +91,13 @@ public class Store{
 
     public void setWorkingDays(List<WorkingDay> workingDays) {
         this.workingDays = workingDays;
+    }
+
+    public List<Employee> getEmployees() {
+        return employees;
+    }
+
+    public void setEmployees(List<Employee> employees) {
+        this.employees = employees;
     }
 }

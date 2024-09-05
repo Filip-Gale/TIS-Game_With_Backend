@@ -65,7 +65,7 @@ public class App {
     @Bean
     public ApplicationRunner applicationRunner() {
         return args -> {
-            //c)
+            //1.c)
           /*  String title = "Lista 4";
             LocalDateTime createdTime = LocalDateTime.now().truncatedTo(ChronoUnit.SECONDS);
             ProductsMetadata pm = new ProductsMetadata(createdTime, title);
@@ -82,7 +82,7 @@ public class App {
 
 */
             /*
-            //d)
+            //1.d)
             String name = "Name 1";
             int score = 5;
             Product p = new Product(name, score, pm);
@@ -96,7 +96,7 @@ public class App {
             }*/
 
            /*
-            //e)
+            //1.e)
             productsMetadataRepository.fetchProductsRecord(createdTime.minusMinutes(1), createdTime.minusSeconds(2));
 
             if (pm != null) {
@@ -106,7 +106,7 @@ public class App {
             }
             */
            /*
-            //f)
+            //1.f)
             var avg = productRepositoryJPA.getAverageScoreJPQL(15L);
             System.out.println("avg  " + avg);
 
@@ -118,14 +118,15 @@ public class App {
             }
 */
             //2 c)
-            System.out.println("Fetch store by email: " + storeRepository.fetchStoreRecord("info@seveneleven.com").getStoreName());
-            System.out.println("Fetch by id: "+ storeRepository.findById(1L).get().getStoreName());
-
             StoreServiceImpl storeService = new StoreServiceImpl(storeRepository);
 
+            /*System.out.println("Fetch store by email: " + storeRepository.fetchStoreRecord("info@seveneleven.com").getStoreName());
+            Store store = storeRepository.findById(1L).orElseThrow(() -> new RuntimeException("Store not found"));
+            System.out.println("Fetch by id: " + store.getStoreName());
 
-            System.out.println("get store by id: " + storeService.getStorebyId(1L).getStoreName());
-            /*System.out.println("add store: " + storeService.addStore(
+            System.out.println("Get store by id: " + storeService.getStorebyId(1L).getStoreName());*/
+
+           /* System.out.println("Add store: " + storeService.addStore(
                     new StoreDto(
                             "MegaMart",
                             new Address("Los Angeles", "USA", "Sunset Boulevard", "202"),
@@ -138,7 +139,8 @@ public class App {
                     )
             ));*/
 
-            /*System.out.println("update: " + storeService.updateStore(2L, new StoreDto(
+           /* System.out.println("Update: " + storeService.updateStore(2L,
+                    new StoreDto(
                             "MegaMart2",
                             new Address("Los Angeles", "USA", "Sunset Boulevard", "202"),
                             "01-345-6789",
@@ -151,11 +153,12 @@ public class App {
             ));*/
 
             //storeService.deleteStore(2L);
-            storeService.partialUpdateStore(1L, new StoreDto("9-11", null, null, null, null));
-            System.out.println("get all stores: \n");
-            for (StoreDto storeDto : storeService.getAllStores()) {
-                System.out.println(storeDto.getStoreName());
-            }
+            //storeService.partialUpdateStore(1L, new StoreDto("9-11", null, null, null, null));
+            System.out.println("Get all stores: \n");
+            storeService.getAllStores().stream()
+                    .map(StoreDto::getStoreName)
+                    .forEach(System.out::println);
+
         };
     }
 

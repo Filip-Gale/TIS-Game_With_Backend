@@ -9,7 +9,7 @@ import java.text.DecimalFormat;
 
 @Entity
 @Table(name = "PRODUCT", schema = "PRODUCT_MANAGER")
-public class Product implements Serializable {
+public class Product {
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
   private Long id;

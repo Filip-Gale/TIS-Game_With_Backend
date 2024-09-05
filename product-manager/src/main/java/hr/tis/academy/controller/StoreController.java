@@ -2,8 +2,11 @@ package hr.tis.academy.controller;
 
 import hr.tis.academy.dto.StoreDto;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cglib.core.Local;
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.web.bind.annotation.*;
 
+import java.time.LocalDate;
 import java.util.List;
 
 @RestController
@@ -45,4 +48,10 @@ public class StoreController {
     public StoreDto patchStore(@PathVariable Long id, @RequestBody StoreDto storeDto) {
         return storeService.partialUpdateStore(id, storeDto);
     }
+
+    @GetMapping("/{id}/{date}/is-open")
+    public boolean isStoreOpen(@PathVariable long id, @PathVariable("date") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate date) {
+        return storeService.isStoreOpen(id, date);
+    }
+
 }

@@ -8,7 +8,7 @@ import java.util.Date;
 
 @Entity
 @Table(name = "EMPLOYEE", schema = "PRODUCT_MANAGER")
-public class Employee implements Serializable {
+public class Employee {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -29,6 +29,23 @@ public class Employee implements Serializable {
     @ManyToOne
     @JoinColumn(name = "POSITION_ID")
     private Position position;
+    @ManyToOne
+    @JoinColumn(name = "STORE_ID")
+    private Store store;
+
+    public Employee() {}
+
+    public Employee(String first_name, String last_name, java.sql.Date date_of_birth, String OIB, java.sql.Date starting_work_date, Double salary, Integer vacation_days, Position position, Store store) {
+        this.first_name = first_name;
+        this.last_name = last_name;
+        this.date_of_birth = date_of_birth;
+        this.OIB = OIB;
+        this.starting_work_date = starting_work_date;
+        this.salary = salary;
+        this.vacation_days = vacation_days;
+        this.position = position;
+        this.store = store;
+    }
 
     public Long getId() {
         return id;

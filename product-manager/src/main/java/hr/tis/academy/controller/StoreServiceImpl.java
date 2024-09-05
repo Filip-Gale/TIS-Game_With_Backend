@@ -9,16 +9,19 @@ import jakarta.annotation.PostConstruct;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.time.DayOfWeek;
+import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class StoreServiceImpl implements StoreService {
 
     //private  final  Map<Long, StoreDto> storeMap = new HashMap<>();
-    private final StoreRepository storeRepository;
     //private  Long currentId = 1L;
+    private final StoreRepository storeRepository;
 
     @Autowired
     public StoreServiceImpl(StoreRepository storeRepository) {
@@ -26,7 +29,7 @@ public class StoreServiceImpl implements StoreService {
     }
     @PostConstruct
     public void init() {
-        WorkingDay monday = new WorkingDay("MONDAY", LocalTime.of(9, 0), LocalTime.of(17, 0));
+     /*   WorkingDay monday = new WorkingDay("MONDAY", LocalTime.of(9, 0), LocalTime.of(17, 0));
         WorkingDay tuesday = new WorkingDay("TUESDAY", LocalTime.of(9, 0), LocalTime.of(17, 0));
 
         Store store = new Store(
@@ -38,10 +41,8 @@ public class StoreServiceImpl implements StoreService {
                         monday, tuesday
                 )
         );
-        monday.setStore(store);
-        tuesday.setStore(store);
-//        storeRepository.save(store);
-/*
+        storeRepository.save(store);
+
         storeRepository.save(new Store(
                 "MegaMart",
                 new Address("Los Angeles", "USA", "Sunset Boulevard", "202"),
@@ -51,9 +52,10 @@ public class StoreServiceImpl implements StoreService {
                         new WorkingDay(3L,"WEDNESDAY", LocalTime.of(10, 0), LocalTime.of(18, 0)),
                         new WorkingDay(4L,"THURSDAY", LocalTime.of(10, 0), LocalTime.of(18, 0))
                 )
-        ));
+        ));*/
 
-        storeRepository.save(new Store(
+
+    /*    storeRepository.save(new Store(
                 "SuperShop",
                 new Address("Chicago", "USA", "State Street", "303"),
                 "01-456-7890",
@@ -76,7 +78,7 @@ public class StoreServiceImpl implements StoreService {
 
     @Override
     public StoreDto getStorebyId(Long id) {
-        Store s = storeRepository.findById(id).get();
+        Store s = storeRepository.findById(id).orElseThrow(() -> new RuntimeException("Store not found"));;
         return storeToStoreDTO(s);
     }
 
@@ -105,7 +107,7 @@ public class StoreServiceImpl implements StoreService {
             storeMap.put(id, store);
             return store;
         }*/
-        Store s = storeRepository.findById(id).get();
+        Store s = storeRepository.findById(id).orElseThrow(() -> new RuntimeException("Store not found"));;
         s.setStoreName(store.getStoreName());
         s.setAddress(store.getAddress());
         s.setTelephoneNumber(store.getTelephoneNumber());
@@ -124,7 +126,7 @@ public class StoreServiceImpl implements StoreService {
     @Override
     public StoreDto partialUpdateStore(Long id, StoreDto store) {
         //StoreDto existingStore = storeMap.get(id);
-        Store existingStore = storeRepository.findById(id).get();
+        Store existingStore = storeRepository.findById(id).orElseThrow(() -> new RuntimeException("Store not found"));;
         if(store.getStoreName() != null){
             existingStore.setStoreName(store.getStoreName());
         }
@@ -142,5 +144,18 @@ public class StoreServiceImpl implements StoreService {
         }
         storeRepository.save(existingStore);
         return storeToStoreDTO(existingStore);
+    }
+
+    @Override
+    public boolean isStoreOpen(Long id, LocalDate date) {
+        Store store = storeRepository.findById(id).orElseThrow(() -> new RuntimeException("Store not found"));
+
+        String requestedDayOfWeek = date.getDayOfWeek().name();
+
+        Optional<WorkingDay> workingDay = store.getWorkingDays().stream()
+                .filter(wd -> wd.getDayOfWeek().equalsIgnoreCase(requestedDayOfWeek))
+                .findFirst();
+
+        return workingDay.isPresent();
     }
 }
