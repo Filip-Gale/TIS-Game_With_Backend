@@ -79,12 +79,22 @@ public class ProductsMetadata {
     this.products = products;
   }
 
-  @Override
+ /* @Override
   public String toString() {
     StringBuilder sb = new StringBuilder();
     sb.append(title).append(" ").append(creationDateTime).append("\n");
 
     return sb.toString();
+  }*/
+
+  @Override
+  public String toString() {
+    return "ProductsMetadata{" +
+            "id=" + id +
+            ", creationDateTime=" + creationDateTime +
+            ", title='" + title + '\'' +
+            ", products=" + products +
+            '}';
   }
 
   public static void main(String[] args) {

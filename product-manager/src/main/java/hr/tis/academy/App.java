@@ -114,6 +114,8 @@ public class App {
             for (ProductsMetadata productsMetadata : lista) {
                 System.out.println("productsMetadata: " + productsMetadata);
             }
+
+
         };
     }
 

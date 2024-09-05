@@ -84,4 +84,16 @@ public class Product implements Serializable {
             ", score=" + score +
             '}';
   }*/
+
+  @Override
+  public String toString() {
+    return "Product{" +
+            "id=" + id +
+            ", name='" + name + '\'' +
+            ", price=" + price +
+            ", currency='" + currency + '\'' +
+            ", score=" + score +
+            ", productsMetadata ID: " + productsMetadata.getId() +
+            '}';
+  }
 }
