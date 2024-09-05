@@ -10,15 +10,20 @@ import hr.tis.academy.model.ProductsMetadata;
 import hr.tis.academy.repository.ProductRepositoryDB;
 import hr.tis.academy.repository.ProductRepositoryFile;
 import hr.tis.academy.repository.ProductRepositoryInMemory;
+import hr.tis.academy.repository.ProductsMetadataRepository;
 import hr.tis.academy.scraper.WebScraper;
 import hr.tis.academy.service.ProductService;
 import hr.tis.academy.service.impl.ProductServiceImpl;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.ApplicationContext;
+import org.springframework.stereotype.Component;
 
 import java.nio.file.Path;
 import java.text.ParseException;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.Scanner;
+
 
 public class ProductsConsole {
     private static ProductService productService = null;
@@ -83,7 +88,7 @@ public class ProductsConsole {
                         System.out.println(productService.saveProductsFromWeb());
                     }
                 }
-                else if (command.equals("file") || command.equals("in-memory") || command.equals("db")) {
+                /*else if (command.equals("file") || command.equals("in-memory") || command.equals("db")) {
                     if(command.equals("file"))
                     {
                         //Promjeniti na ProductRepositoryFile
@@ -96,7 +101,7 @@ public class ProductsConsole {
                         //Promjeniti na ProductRepositoryDB
                         productService = new ProductServiceImpl(new ProductRepositoryDB(), ProductsMetadataMapper.INSTANCE, webScraper);
                     }
-                }
+                }*/
 
                 else if (command.equals("exit")) {
                     break;

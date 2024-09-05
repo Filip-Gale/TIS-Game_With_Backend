@@ -6,6 +6,7 @@ import hr.tis.academy.repository.ProductRepository;
 import hr.tis.academy.repository.ProductRepositoryDB;
 import hr.tis.academy.repository.ProductRepositoryFile;
 import hr.tis.academy.repository.ProductRepositoryInMemory;
+import jakarta.persistence.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.ApplicationContext;
@@ -19,12 +20,18 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
-
+@Entity
+@Table(name = "PRODUCTS_METADATA", schema = "PRODUCT_MANAGER")
 public class ProductsMetadata {
+  @Id
+  @GeneratedValue(strategy = GenerationType.IDENTITY)
   private Long id;
+  @Column
   private LocalDateTime creationDateTime;
+  @Column
   private String title;
-  private List<Product> products;
+  @OneToMany(mappedBy = "productsMetadata", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+  private List<Product> products = new ArrayList<>();
 
   public Long getId() {
     return id;
@@ -40,6 +47,11 @@ public class ProductsMetadata {
 
   public void setCreationDateTime(LocalDateTime creationDateTime) {
     this.creationDateTime = creationDateTime;
+  }
+
+  public ProductsMetadata(LocalDateTime creationDateTime, String title) {
+    this.creationDateTime = creationDateTime;
+    this.title = title;
   }
 
   public ProductsMetadata(Long id, LocalDateTime creationDateTime, String title, List<Product> products) {
@@ -110,6 +122,6 @@ public class ProductsMetadata {
 
     prdb.insertProducts(p);
     prdb.insertProducts(p2);
-    System.out.println( prdb.fetchSumOfPrices(p.getCreationDateTime().toLocalDate()));
+    System.out.println(prdb.fetchSumOfPrices(p.getCreationDateTime().toLocalDate()));
   }
 }

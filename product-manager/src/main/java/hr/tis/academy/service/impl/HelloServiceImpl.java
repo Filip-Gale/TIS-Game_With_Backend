@@ -1,9 +1,12 @@
 package hr.tis.academy.service.impl;
 
 import hr.tis.academy.command.ImageCommand;
+import hr.tis.academy.configuration.ExceptionHandlerController;
 import hr.tis.academy.dto.DaysOfWeekResponse;
 import hr.tis.academy.dto.WeekendResponse;
 import hr.tis.academy.service.HelloService;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 
 import javax.imageio.ImageIO;
@@ -21,9 +24,13 @@ import java.time.DayOfWeek;
 
 @Service
 public class HelloServiceImpl implements HelloService {
+    private static final Logger LOGGER =
+            LoggerFactory.getLogger(HelloServiceImpl.class);
+
 
     @Override
     public DaysOfWeekResponse daysOfWeek() {
+        LOGGER.info("Nalazim se u metodi daysOfWeek");
         DayOfWeek today = LocalDate.now().getDayOfWeek();
         List<String> oddDays = Stream.of(DayOfWeek.values())
                 .filter(dayOfWeek -> dayOfWeek.getValue() % 2 != 0)
@@ -79,7 +86,7 @@ public class HelloServiceImpl implements HelloService {
         try {
             ImageIO.write(bufferedImage, "png", baos);
         } catch (IOException e) {
-            e.printStackTrace();
+            LOGGER.error("Exception occurred: ", e);
             return new byte[0];
         }
 

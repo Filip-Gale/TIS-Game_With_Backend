@@ -72,7 +72,7 @@ public class ProductRepositoryFile implements ProductRepository {
                 .map(file -> productReader.read(file.getName()))
                 .filter(pm -> pm.getCreationDateTime().toLocalDate().isEqual(createdDate))
                 .max(Comparator.comparing(ProductsMetadata::getCreationDateTime))
-                .orElseThrow(() -> new NoProductFoundException("No product found for " + createdDate));
+                .orElseThrow(() -> new  NoProductFoundException("No product found for " + createdDate));
     }
 
     @Override

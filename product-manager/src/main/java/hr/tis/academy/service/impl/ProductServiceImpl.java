@@ -5,6 +5,7 @@ import hr.tis.academy.mappers.ProductsMetadataMapper;
 import hr.tis.academy.model.ProductsMetadata;
 import hr.tis.academy.repository.ProductRepository;
 import hr.tis.academy.repository.ProductRepositoryInMemory;
+import hr.tis.academy.repository.ProductsMetadataRepository;
 import hr.tis.academy.scraper.WebScraper;
 import hr.tis.academy.service.ProductService;
 import org.hibernate.annotations.CollectionTypeRegistration;
@@ -17,15 +18,18 @@ import java.time.LocalDate;
 @Service
 public class ProductServiceImpl implements ProductService {
 
-    private final ProductRepository productRepository;
+    private final ProductsMetadataRepository productsMetadataRepository;
     private final ProductsMetadataMapper productsMetadataMapper;
     private final WebScraper webScraper;
 
+
     @Autowired
-    public ProductServiceImpl(ProductRepository productRepository, ProductsMetadataMapper productsMetadataMapper, WebScraper webScraper) {
-        this.productRepository = productRepository;
+    public ProductServiceImpl(ProductsMetadataRepository productsMetadataRepository,
+                              ProductsMetadataMapper productsMetadataMapper,
+                              WebScraper webScraper) {
         this.productsMetadataMapper = productsMetadataMapper;
         this.webScraper = webScraper;
+        this.productsMetadataRepository = productsMetadataRepository;
     }
     @Override
     public ProductsMetadataDto fetchProductsFromWeb() {
@@ -35,12 +39,14 @@ public class ProductServiceImpl implements ProductService {
     @Override
     public ProductsMetadataDto saveProductsFromWeb() {
         ProductsMetadata productsMetadata = webScraper.fetchProducts();
-        productRepository.insertProducts(productsMetadata);
+        //productRepository.insertProducts(productsMetadata);
+        productsMetadataRepository.save(productsMetadata);
         return null;
     }
 
     @Override
     public ProductsMetadataDto getProductsForDate(LocalDate date) {
-        return productsMetadataMapper.toDto(productRepository.fetchProductsMetadata(date));
+        //return productsMetadataMapper.toDto(productRepository.fetchProductsMetadata(date));
+        return productsMetadataMapper.toDto(productsMetadataRepository.fetchProductsRecord(date.atStartOfDay()));
     }
 }

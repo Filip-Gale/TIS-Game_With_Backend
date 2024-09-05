@@ -12,21 +12,22 @@ import java.util.UUID;
 
 @ControllerAdvice
 public class ExceptionHandlerController extends ResponseEntityExceptionHandler {
-  private static final Logger LOGGER =
-          LoggerFactory.getLogger(ExceptionHandlerController.class);
-  @ExceptionHandler(Exception.class)
-  public final ResponseEntity<String> handleAnyException(Exception exception) {
-    var uuid = UUID.randomUUID().toString();
-    LOGGER.error("Unhandled exception uuid: '{}'", uuid, exception);
-    String errorMessage = String.format("An unexpected error occurred. Reference ID: %s", uuid);
-    return ResponseEntity.internalServerError().body(errorMessage);
-  }
+    private static final Logger LOGGER =
+            LoggerFactory.getLogger(ExceptionHandlerController.class);
 
-  @ExceptionHandler(NoProductFoundException.class)
-  public final ResponseEntity<String> handleNoProductFoundException(NoProductFoundException exception) {
-    var uuid = UUID.randomUUID().toString();
-    LOGGER.error("NoProductFoundException uuid: '{}'", uuid, exception);
-    String errorMessage = String.format("Product not found. Reference ID: %s", uuid);
-    return ResponseEntity.status(404).body(errorMessage);
-  }
+    @ExceptionHandler(Exception.class)
+    public final ResponseEntity<String> handleAnyException(Exception exception) {
+        var uuid = UUID.randomUUID().toString();
+        LOGGER.error("Unhandled exception uuid: '{}'", uuid, exception);
+        String errorMessage = String.format("An unexpected error occurred. Reference ID: %s", uuid);
+        return ResponseEntity.internalServerError().body(errorMessage);
+    }
+
+    @ExceptionHandler(NoProductFoundException.class)
+    public final ResponseEntity<String> handleNoProductFoundException(NoProductFoundException exception) {
+        var uuid = UUID.randomUUID().toString();
+        LOGGER.error("NoProductFoundException uuid: '{}'", uuid, exception);
+        String errorMessage = String.format("Product not found. Reference ID: %s", uuid);
+        return ResponseEntity.status(404).body(errorMessage);
+    }
 }
