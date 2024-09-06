@@ -6,6 +6,8 @@ import org.springframework.stereotype.Component;
 import java.io.Serializable;
 import java.math.BigDecimal;
 import java.text.DecimalFormat;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Table(name = "PRODUCT", schema = "PRODUCT_MANAGER")
@@ -24,6 +26,9 @@ public class Product {
   @ManyToOne
   @JoinColumn(name = "PRODUCTS_METADATA_ID", nullable = false)
   private ProductsMetadata productsMetadata;
+
+  @ManyToOne
+  private ProductsMetadata productMetadata;
 
   public Product() {
 

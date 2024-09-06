@@ -23,61 +23,72 @@ import java.util.List;
 @Entity
 @Table(name = "PRODUCTS_METADATA", schema = "PRODUCT_MANAGER")
 public class ProductsMetadata {
-  @Id
-  @GeneratedValue(strategy = GenerationType.IDENTITY)
-  private Long id;
-  @Column
-  private LocalDateTime creationDateTime;
-  @Column
-  private String title;
-  @OneToMany(mappedBy = "productsMetadata", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-  private List<Product> products = new ArrayList<>();
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+    @Column
+    private LocalDateTime creationDateTime;
+    @Column
+    private String title;
 
-  public Long getId() {
-    return id;
-  }
+    @OneToMany(mappedBy = "productsMetadata", fetch = FetchType.EAGER)
+    private List<Product> products = new ArrayList<>();
 
-  public void setId(Long id) {
-    this.id = id;
-  }
+    @OneToOne(mappedBy = "productMetadata")
+    private ProductsOrder order;
 
-  public LocalDateTime getCreationDateTime() {
-    return creationDateTime;
-  }
+    public Long getId() {
+        return id;
+    }
 
-  public void setCreationDateTime(LocalDateTime creationDateTime) {
-    this.creationDateTime = creationDateTime;
-  }
+    public void setId(Long id) {
+        this.id = id;
+    }
 
-  public ProductsMetadata(LocalDateTime creationDateTime, String title) {
-    this.creationDateTime = creationDateTime;
-    this.title = title;
-  }
+    public LocalDateTime getCreationDateTime() {
+        return creationDateTime;
+    }
 
-  public ProductsMetadata(Long id, LocalDateTime creationDateTime, String title, List<Product> products) {
-    this.id = id;
-    this.creationDateTime = creationDateTime;
-    this.title = title;
-    this.products = products;
-  }
+    public void setCreationDateTime(LocalDateTime creationDateTime) {
+        this.creationDateTime = creationDateTime;
+    }
 
-  public ProductsMetadata() {}
+    public ProductsMetadata(LocalDateTime creationDateTime, String title) {
+        this.creationDateTime = creationDateTime;
+        this.title = title;
+    }
 
-  public String getTitle() {
-    return title;
-  }
+    public ProductsMetadata(Long id, LocalDateTime creationDateTime, String title, List<Product> products) {
+        this.id = id;
+        this.creationDateTime = creationDateTime;
+        this.title = title;
+        this.products = products;
+    }
 
-  public void setTitle(String title) {
-    this.title = title;
-  }
+    public ProductsMetadata(LocalDateTime creationDateTime, String title, List<Product> products) {
+        this.creationDateTime = creationDateTime;
+        this.title = title;
+        this.products = products;
+    }
 
-  public List<Product> getProducts() {
-    return products;
-  }
+    public ProductsMetadata() {
+    }
 
-  public void setProducts(List<Product> products) {
-    this.products = products;
-  }
+    public String getTitle() {
+        return title;
+    }
+
+    public void setTitle(String title) {
+        this.title = title;
+    }
+
+    public List<Product> getProducts() {
+        return products;
+    }
+
+    public void setProducts(List<Product> products) {
+        this.products = products;
+    }
 
  /* @Override
   public String toString() {
@@ -87,38 +98,38 @@ public class ProductsMetadata {
     return sb.toString();
   }*/
 
-  @Override
-  public String toString() {
-    return "ProductsMetadata{" +
-            "id=" + id +
-            ", creationDateTime=" + creationDateTime +
-            ", title='" + title + '\'' +
-            ", products=" + products +
-            '}';
-  }
+    @Override
+    public String toString() {
+        return "ProductsMetadata{" +
+                "id=" + id +
+                ", creationDateTime=" + creationDateTime +
+                ", title='" + title + '\'' +
+                ", products=" + products +
+                '}';
+    }
 
-  public static void main(String[] args) {
-    ArrayList<Product> products = new ArrayList<>();
-    ArrayList<Product> products2 = new ArrayList<>();
+    public static void main(String[] args) {
+        ArrayList<Product> products = new ArrayList<>();
+        ArrayList<Product> products2 = new ArrayList<>();
 
-    products.add(new Product("Maslac 250g", new BigDecimal("1"),"r",3));
-    products.add(new Product("Jagoda 10g",new BigDecimal("12"),"r2",4));
+        products.add(new Product("Maslac 250g", new BigDecimal("1"), "r", 3));
+        products.add(new Product("Jagoda 10g", new BigDecimal("12"), "r2", 4));
 
-    products2.add(new Product("Pekmez 100kg",new BigDecimal("1"),"r",3));
-    products2.add(new Product("Čokolino 1kg",new BigDecimal("7.19"),"EUR/kg",5));
+        products2.add(new Product("Pekmez 100kg", new BigDecimal("1"), "r", 3));
+        products2.add(new Product("Čokolino 1kg", new BigDecimal("7.19"), "EUR/kg", 5));
 
-    ProductsMetadata p = new ProductsMetadata(null, LocalDateTime.now(),"Lista 1",products);
-    ProductsMetadata p2 = new ProductsMetadata(null, LocalDateTime.now(),"Lista 2",products2);
-    ProductsMetadata p3 = new ProductsMetadata(null, LocalDateTime.now(),"Lista 3",products2);
+        ProductsMetadata p = new ProductsMetadata(null, LocalDateTime.now(), "Lista 1", products);
+        ProductsMetadata p2 = new ProductsMetadata(null, LocalDateTime.now(), "Lista 2", products2);
+        ProductsMetadata p3 = new ProductsMetadata(null, LocalDateTime.now(), "Lista 3", products2);
 
-    ProductRepositoryInMemory prim = new ProductRepositoryInMemory();
+        ProductRepositoryInMemory prim = new ProductRepositoryInMemory();
 
-    prim.insertProducts(p);
-    prim.insertProducts(p2);
+        prim.insertProducts(p);
+        prim.insertProducts(p2);
 
-    System.out.println("calculateSumOfPrices " + prim.calculateSumOfPrices(p.getProducts()));
+        System.out.println("calculateSumOfPrices " + prim.calculateSumOfPrices(p.getProducts()));
 
-    //System.out.println(ProductReader.read("1_2024-08-30T11$25$37.002657200_Lista 3.txt").getTitle());
+        //System.out.println(ProductReader.read("1_2024-08-30T11$25$37.002657200_Lista 3.txt").getTitle());
 
     /*ProductRepositoryFile prf = new ProductRepositoryFile();
     System.out.println("insertProducts(p3) " + prf.insertProducts(p3));
@@ -128,10 +139,10 @@ public class ProductsMetadata {
     System.out.println("fetchProductsMetadata " + prf.fetchProductsMetadata(1L));
     System.out.println("fetchProductsMetadataCount " + prf.fetchProductsMetadataCount());*/
 
-    ProductRepository prdb = new ProductRepositoryDB();
+        ProductRepository prdb = new ProductRepositoryDB();
 
-    prdb.insertProducts(p);
-    prdb.insertProducts(p2);
-    System.out.println(prdb.fetchSumOfPrices(p.getCreationDateTime().toLocalDate()));
-  }
+        prdb.insertProducts(p);
+        prdb.insertProducts(p2);
+        System.out.println(prdb.fetchSumOfPrices(p.getCreationDateTime().toLocalDate()));
+    }
 }

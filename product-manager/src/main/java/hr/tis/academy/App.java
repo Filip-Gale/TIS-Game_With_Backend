@@ -1,9 +1,11 @@
 package hr.tis.academy;
 
+import hr.tis.academy.controller.StoreService;
 import hr.tis.academy.controller.StoreServiceImpl;
 import hr.tis.academy.dto.StoreDto;
 import hr.tis.academy.model.*;
 import hr.tis.academy.repository.*;
+import hr.tis.academy.service.impl.ProductOrderServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.boot.ApplicationRunner;
@@ -55,11 +57,18 @@ public class App {
     private final ProductsMetadataRepository productsMetadataRepository;
     private final ProductRepositoryJPA productRepositoryJPA;
     private  final StoreRepository storeRepository;
+    private final ProducOrderRepository producOrderRepository;
+    private final EmployeeRepository employeeRepository;
+    private final PositionRepository positionRepository;
+
     @Autowired
-    public App(ProductsMetadataRepository productsMetadataRepository, ProductRepositoryJPA productRepositoryJPA, StoreRepository storeRepository) {
+    public App(ProductsMetadataRepository productsMetadataRepository, ProductRepositoryJPA productRepositoryJPA, StoreRepository storeRepository, ProducOrderRepository producOrderRepository, EmployeeRepository employeeRepository, PositionRepository positionRepository) {
         this.productsMetadataRepository = productsMetadataRepository;
         this.productRepositoryJPA = productRepositoryJPA;
         this.storeRepository = storeRepository;
+        this.producOrderRepository = producOrderRepository;
+        this.employeeRepository = employeeRepository;
+        this.positionRepository = positionRepository;
     }
 
     @Bean
@@ -158,6 +167,14 @@ public class App {
             storeService.getAllStores().stream()
                     .map(StoreDto::getStoreName)
                     .forEach(System.out::println);
+
+            ProductOrderServiceImpl productOrderService = new ProductOrderServiceImpl(
+                    producOrderRepository,
+                    employeeRepository,
+                    storeRepository,
+                    productsMetadataRepository,
+                    positionRepository);
+
 
         };
     }

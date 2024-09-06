@@ -19,6 +19,16 @@ public class Position {
     @Enumerated(EnumType.STRING)
     private Level level;
 
+    @OneToMany(mappedBy = "position")
+    private List<Employee> employee;
+
+    public Position() {}
+
+    public Position(Title title, Level level) {
+        this.title = title;
+        this.level = level;
+    }
+
     public Long getId() {
         return id;
     }
