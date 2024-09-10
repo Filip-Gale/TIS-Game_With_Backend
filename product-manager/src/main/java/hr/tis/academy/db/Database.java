@@ -12,7 +12,7 @@ public class Database {
         }
     }
 
-    private static final String DB_URL = "jdbc:h2:./db/academy";
+    private static final String DB_URL = "jdbc:h2:./db/hackathon";
     private static Database instance;
 
     private Database() {
