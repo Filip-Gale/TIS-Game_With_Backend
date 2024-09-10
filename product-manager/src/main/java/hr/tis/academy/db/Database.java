@@ -1,8 +1,5 @@
 package hr.tis.academy.db;
 
-import hr.tis.academy.repository.ProductRepository;
-import hr.tis.academy.repository.ProductRepositoryDB;
-
 import java.sql.*;
 
 public class Database {
@@ -13,10 +10,6 @@ public class Database {
         } catch (ClassNotFoundException e) {
             e.printStackTrace();
         }
-    }
-
-    public static void main(String[] args) {
-        init();
     }
 
     private static final String DB_URL = "jdbc:h2:./db/academy";
