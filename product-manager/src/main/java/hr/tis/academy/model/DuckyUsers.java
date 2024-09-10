@@ -15,9 +15,6 @@ public class DuckyUsers {
     private String userName;
 
     @Column
-    private Boolean userExists;
-
-    @Column
     private Boolean isCheater;
 
     @OneToMany (mappedBy = "duckyUsers")
@@ -27,7 +24,6 @@ public class DuckyUsers {
 
     public DuckyUsers(String userName, Boolean userExists, Boolean isCheater) {
         this.userName = userName;
-        this.userExists = userExists;
         this.isCheater = isCheater;
     }
 
@@ -45,14 +41,6 @@ public class DuckyUsers {
 
     public void setUserName(String userName) {
         this.userName = userName;
-    }
-
-    public Boolean getUserExists() {
-        return userExists;
-    }
-
-    public void setUserExists(Boolean userExists) {
-        this.userExists = userExists;
     }
 
     public Boolean getCheater() {

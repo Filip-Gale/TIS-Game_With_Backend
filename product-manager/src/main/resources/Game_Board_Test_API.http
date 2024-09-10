@@ -1,0 +1,7 @@
+###Get a GameBoard
+GET http://localhost:8080/game-board?userId=1
+Content-Type: application/json
+
+### Get the Tile detail from a Game in progress
+GET http://localhost:8080/game-board/details?x=1&y=2&userId=2
+Content-Type: application/json

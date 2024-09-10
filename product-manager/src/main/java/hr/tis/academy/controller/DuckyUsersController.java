@@ -1,6 +1,7 @@
 package hr.tis.academy.controller;
 
 import hr.tis.academy.model.DuckyUsers;
+import hr.tis.academy.model.UserExists;
 import hr.tis.academy.model.dto.DuckyUsersDto;
 import hr.tis.academy.service.DuckyUserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,10 +20,10 @@ public class DuckyUsersController {
 
     @GetMapping
     DuckyUsersDto getDuckyUsers(@RequestParam String userName) {
-        DuckyUsers duckyUsers = duckyUserService.getDuckyUsersByUsername(userName);
+        DuckyUsers duckyUsers = duckyUserService.getDuckyUsersByUserName(userName);
         DuckyUsersDto duckyUsersDto = new DuckyUsersDto();
         duckyUsersDto.setId(duckyUsers.getId());
-        duckyUsersDto.setUsername(duckyUsers.getUserName());
+        duckyUsersDto.setUserName(userName);
         return duckyUsersDto;
 
     }
@@ -32,12 +33,12 @@ public class DuckyUsersController {
         duckyUserService.addDuckyUser(duckyUsersDto);
         DuckyUsersDto duckyUsersDto2 = new DuckyUsersDto();
         duckyUsersDto2.setId(duckyUsersDto.getId());
-        duckyUsersDto2.setUsername(duckyUsersDto.getUsername());
+        duckyUsersDto2.setUserName(duckyUsersDto.getUserName());
         return duckyUsersDto2;
     }
 
     @GetMapping("{id}/user-exists")
-    DuckyUsersDto checkUserExists(@PathVariable("id") Long id) {
+    UserExists checkUserExists(@PathVariable("id") Long id) {
         return duckyUserService.checkIfDuckyUserExists(id);
     }
 }

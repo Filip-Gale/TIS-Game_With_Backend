@@ -2,6 +2,7 @@ package hr.tis.academy.service.impl;
 
 import hr.tis.academy.model.DuckyUsers;
 import hr.tis.academy.model.dto.DuckyUsersDto;
+import hr.tis.academy.model.UserExists;
 import hr.tis.academy.repository.DuckyUserRepository;
 import hr.tis.academy.service.DuckyUserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,24 +19,22 @@ public class DuckyUsersServiceImpl implements DuckyUserService {
     }
 
     @Override
-    public DuckyUsers getDuckyUsersByUsername(String username) {
+    public DuckyUsers getDuckyUsersByUserName(String username) {
         return duckyUserRepository.findByUserName(username);
     }
 
     @Override
     public DuckyUsersDto addDuckyUser(DuckyUsersDto duckyUsersDto) {
-        DuckyUsers duckyUsers = new DuckyUsers(duckyUsersDto.getUsername(),true,false);
+        DuckyUsers duckyUsers = new DuckyUsers(duckyUsersDto.getUserName(),true,false);
         duckyUserRepository.save(duckyUsers);
         DuckyUsersDto duckyUsersDto2 = new DuckyUsersDto();
         duckyUsersDto2.setId(duckyUsers.getId());
-        duckyUsersDto2.setUsername(duckyUsers.getUserName());
+        duckyUsersDto2.setUserName(duckyUsers.getUserName());
         return duckyUsersDto2;
     }
 
     @Override
-    public DuckyUsersDto checkIfDuckyUserExists(Long id) {
-        DuckyUsersDto duckyUsersDto = new DuckyUsersDto();
-            duckyUsersDto.setUserExists(duckyUserRepository.existsById(id));
-            return duckyUsersDto;
+    public UserExists checkIfDuckyUserExists(Long id) {
+        return new UserExists(duckyUserRepository.existsById(id));
     }
 }

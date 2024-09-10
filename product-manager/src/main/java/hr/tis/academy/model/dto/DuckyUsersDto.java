@@ -3,8 +3,7 @@ package hr.tis.academy.model.dto;
 
 public class DuckyUsersDto {
     private Long id;
-    private String username;
-    private Boolean userExists;
+    private String userName;
     private Boolean isCheater;
 
     public DuckyUsersDto() {}
@@ -17,20 +16,12 @@ public class DuckyUsersDto {
         this.id = id;
     }
 
-    public String getUsername() {
-        return username;
+    public String getUserName() {
+        return userName;
     }
 
-    public void setUsername(String username) {
-        this.username = username;
-    }
-
-    public Boolean getUserExists() {
-        return userExists;
-    }
-
-    public void setUserExists(Boolean userExists) {
-        this.userExists = userExists;
+    public void setUserName(String username) {
+        this.userName = username;
     }
 
     public Boolean getCheater() {

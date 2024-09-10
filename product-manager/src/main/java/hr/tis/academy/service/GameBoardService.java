@@ -1,10 +1,9 @@
 package hr.tis.academy.service;
 
-import hr.tis.academy.model.GameGrid;
-import hr.tis.academy.model.GameObjects;
-import hr.tis.academy.model.dto.GameBoardDto;
+import hr.tis.academy.dto.GameObjectsDTO;
+import hr.tis.academy.model.dto.GameGridDto;
 
 public interface GameBoardService {
-    GameGrid findGameGridByUserId(Long userId);
-    GameObjects getBoardTileDetail(Integer x, Integer y, Long userId);
+    GameGridDto findGameGridByUserId(Long userId);
+    GameObjectsDTO getBoardTileDetail(Integer x, Integer y, Long userId);
 }
