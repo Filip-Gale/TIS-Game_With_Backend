@@ -12,15 +12,19 @@ import java.util.List;
 
 @Repository
 public interface GameObjectsRepository extends JpaRepository<GameObjects, Long>{
-    @Query(nativeQuery = true, value = "SELECT * FROM QUACKY. e WHERE e.ENTITY_TYPE = 'MAIN_CHARACTER' AND e.GAME_BOARD_ID.DUCKY_USERS_ID = :id")
+    //    @Query(nativeQuery = true, value = "SELECT e.ID as gameObjectId, e.X, e.Y, e.HEALTH, e.MOVE_DISTANCE, gb.ID as gameBoardId FROM QUACKY.GAME_OBJECTS e JOIN QUACKY.GAME_BOARD gb ON e.GAME_BOARD_ID = gb.ID WHERE gb.DUCKY_USERS_ID = :id")
+    @Query(nativeQuery = true, value = "SELECT * FROM QUACKY.GAME_OBJECTS go WHERE go.ENTITY_TYPE = 'MAIN_CHARACTER' AND go.GAME_BOARD_ID IN (SELECT gb.ID FROM QUACKY.GAME_BOARD gb WHERE gb.DUCKY_USERS_ID = :id)")
     GameObjects fetchMainCharacterByUserID(Long id);
 
-    @Query(nativeQuery = true, value = "SELECT * FROM QUACKY. e WHERE e.ID = :id")
-    GameObjects fetchEnemyByUserID(Long id);
+    @Query(nativeQuery = true, value = "SELECT * FROM QUACKY.GAME_OBJECTS go WHERE go.ENTITY_TYPE = 'MAIN_CHARACTER' AND go.GAME_BOARD_ID IN (SELECT gb.ID FROM QUACKY.GAME_BOARD gb WHERE gb.DUCKY_USERS_ID = :id)")
+    GameObjects fetchMainCharacterSkillsByUserID(Long id);
 
-    @Query(nativeQuery = true, value = "SELECT * FROM QUACKY. e WHERE e.ID = :id")
-    GameObjects fetchEggByUserID(Long id);
+    @Query(nativeQuery = true, value = "SELECT * FROM QUACKY.GAME_OBJECTS go WHERE go.ENTITY_TYPE = 'ENEMY' AND go.GAME_BOARD_ID IN (SELECT gb.ID FROM QUACKY.GAME_BOARD gb WHERE gb.DUCKY_USERS_ID = :id)")
+    List<GameObjects> fetchEnemiesByUserID(Long id);
 
-    @Query(nativeQuery = true, value = "SELECT * FROM QUACKY. e WHERE e.ID = :id")
-    GameObjects fetchObstacleByUserID(Long id);
+    @Query(nativeQuery = true, value = "SELECT * FROM QUACKY.GAME_OBJECTS go WHERE go.ENTITY_TYPE = 'EGG' AND go.GAME_BOARD_ID IN (SELECT gb.ID FROM QUACKY.GAME_BOARD gb WHERE gb.DUCKY_USERS_ID = :id)")
+    List<GameObjects> fetchEggsByUserID(Long id);
+
+    @Query(nativeQuery = true, value = "SELECT * FROM QUACKY.GAME_OBJECTS go WHERE go.ENTITY_TYPE = 'OBSTACLE' AND go.GAME_BOARD_ID IN (SELECT gb.ID FROM QUACKY.GAME_BOARD gb WHERE gb.DUCKY_USERS_ID = :id)")
+    List<GameObjects> fetchObstaclesByUserID(Long id);
 }

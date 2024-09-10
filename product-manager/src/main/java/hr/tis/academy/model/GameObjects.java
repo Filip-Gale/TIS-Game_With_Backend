@@ -28,6 +28,7 @@ public class GameObjects {
     private EntityType entityType;
 
     @ManyToMany
+    @JoinTable(schema = "QUACKY")
     private List<Skills> skills;
 
     @ManyToOne
