@@ -9,14 +9,8 @@ import java.util.List;
 @JsonInclude(JsonInclude.Include.NON_NULL)
 public class GameObjectsDTO {
 
-    public GameObjectsDTO(Long id, Integer x, Integer y, Integer moveDistance, Integer health, EntityType entityType, List<Skills> skillsList) {
-        this.id = id;
-        this.x = x;
-        this.y = y;
-        this.moveDistance = moveDistance;
-        this.health = health;
-        this.entityType = entityType;
-        this.skillsList = skillsList;
+    public GameObjectsDTO() {
+
     }
 
     private Long id;

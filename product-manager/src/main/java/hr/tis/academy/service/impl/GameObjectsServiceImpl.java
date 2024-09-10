@@ -16,22 +16,22 @@ public class GameObjectsServiceImpl implements GameObjectsService {
     }
 
     @Override
-    public GameObjects getMainCharacterByUserID(Integer userID) {
+    public GameObjects getMainCharacterByUserID(Long userID) {
+        return gameObjectsRepository.fetchMainCharacterByUserID(userID);
+    }
+
+    @Override
+    public GameObjects getEnemiesByUserID(Long userID) {
         return null;
     }
 
     @Override
-    public GameObjects getEnemiesByUserID(Integer userID) {
+    public GameObjects getObstaclesByUserID(Long userID) {
         return null;
     }
 
     @Override
-    public GameObjects getObstaclesByUserID(Integer userID) {
-        return null;
-    }
-
-    @Override
-    public GameObjects getEggsByUserID(Integer userID) {
+    public GameObjects getEggsByUserID(Long userID) {
         return null;
     }
 }
