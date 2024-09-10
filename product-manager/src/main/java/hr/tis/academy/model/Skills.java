@@ -28,4 +28,6 @@ public class Skills {
 
     @ManyToMany
     private List<GameObjects> gameObjects;
+
+    public Skills (){}
 }

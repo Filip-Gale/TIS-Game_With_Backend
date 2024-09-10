@@ -23,4 +23,6 @@ public class GameGrid {
 
     @OneToMany(mappedBy = "gameGrid")
     private List<GameBoard> gameBoards;
+
+    public GameGrid() {}
 }

@@ -37,4 +37,6 @@ public class GameObjects {
     @ManyToOne
     @JoinColumn(name = "GAME_BOARD_ID")
     private GameBoard gameBoard;
+
+    public GameObjects() {}
 }
