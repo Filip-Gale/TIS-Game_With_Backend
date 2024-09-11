@@ -26,6 +26,4 @@ public class Skills {
     @Column
     private String skillDescription;
 
-    @ManyToMany
-    private List<GameObjects> gameObjects;
 }
