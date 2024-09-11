@@ -20,6 +20,5 @@ public interface GameBoardRepository extends JpaRepository<GameBoard, Long> {
     GameBoard findByDuckyUsersIdAndGameState(Long duckyUsersId, GameState gameState);
     @Query("SELECT g FROM GameBoard g WHERE g.startTime <= :end AND g.endTime >= :start")
     List<GameBoard> findGameBoardsInInterval(@Param("start") LocalDateTime start, @Param("end") LocalDateTime end);
-    GameBoard findGameBoardByGameState(GameState gameState);
-    DuckyUsers findDuckyUsersById(Long id);
+    GameBoard findGameBoardByGameStateAndDuckyUsersId(GameState gameState, Long id);
 }

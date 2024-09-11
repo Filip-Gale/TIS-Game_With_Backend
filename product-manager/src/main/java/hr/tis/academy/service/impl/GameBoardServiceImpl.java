@@ -192,7 +192,7 @@ public class GameBoardServiceImpl implements GameBoardService {
     @Override
     public void updateGameState(GameStateDto gameStateDto) {
         GameState newGameState = gameStateDtoToGameState(gameStateDto);
-        GameBoard gameBoard = gameBoardRepository.findGameBoardByGameState(GameState.GAME_IN_PROGRESS);
+        GameBoard gameBoard = gameBoardRepository.findGameBoardByGameStateAndDuckyUsersId(GameState.GAME_IN_PROGRESS, gameStateDto.getUserId());
 
         if(gameBoard != null) {
             gameBoard.setGameState(newGameState);

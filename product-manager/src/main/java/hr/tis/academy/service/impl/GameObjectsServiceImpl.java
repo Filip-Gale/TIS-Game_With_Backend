@@ -2,6 +2,7 @@ package hr.tis.academy.service.impl;
 
 import hr.tis.academy.dto.GameObjectsDTO;
 import hr.tis.academy.dto.SkillsDTO;
+import hr.tis.academy.enums.EntityType;
 import hr.tis.academy.file.LogWriter;
 import hr.tis.academy.model.GameObjects;
 import hr.tis.academy.model.Skills;
@@ -16,11 +17,14 @@ import java.util.List;
 
 @Service
 public class GameObjectsServiceImpl implements GameObjectsService {
+
+    private final GameObjectsRepository gameBoardRepository;
     private final GameObjectsRepository gameObjectsRepository;
     private static final String LOG_FILE = LogWriter.LOG_DIRECTORY + "/game_log.txt";
     private final LogWriter logWriter;
     @Autowired
-    public GameObjectsServiceImpl(GameObjectsRepository gameObjectsRepository, LogWriter logWriter) {
+    public GameObjectsServiceImpl(GameObjectsRepository gameBoardRepository, GameObjectsRepository gameObjectsRepository, LogWriter logWriter) {
+        this.gameBoardRepository = gameBoardRepository;
         this.gameObjectsRepository = gameObjectsRepository;
         this.logWriter = logWriter;
     }
@@ -76,6 +80,17 @@ public class GameObjectsServiceImpl implements GameObjectsService {
         if (newX != null && newY != null) {
             String moveLog = formattedEntityType + " moves from (" + gameObject.getX() + ", " + gameObject.getY() +
                     ") to (" + newX + ", " + newY + ")";
+
+            List<GameObjects> allGameobjects = gameObject.getGameBoard().getGameObjects();
+
+
+            for (GameObjects gameObjects : allGameobjects) {
+                if(gameObjects.getX().equals(newX) && gameObjects.getY().equals(newY)) {
+                    if(!gameObjects.getEntityType().equals(EntityType.TILE) && !gameObjects.getEntityType().equals(EntityType.HOLE)){
+                        //Ilegalan potez
+                    }
+                }
+            }
 
             logWriter.writeLogToFile(moveLog, LOG_FILE);
             gameObject.setX(newX);
