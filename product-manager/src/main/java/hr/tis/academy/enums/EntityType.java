@@ -2,5 +2,9 @@ package hr.tis.academy.enums;
 
 public enum EntityType {
     HOLE,
-    TILE
+    TILE,
+    EGG,
+    ENEMY,
+    OBSTACLE,
+    MAIN_CHARACTER
 }

@@ -28,6 +28,7 @@ public class GameObjects {
     private EntityType entityType;
 
     @ManyToMany
+    @JoinTable(schema = "QUACKY")
     private List<Skills> skills;
 
     @ManyToOne
@@ -37,4 +38,76 @@ public class GameObjects {
     @ManyToOne
     @JoinColumn(name = "GAME_BOARD_ID")
     private GameBoard gameBoard;
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public Integer getX() {
+        return x;
+    }
+
+    public void setX(Integer x) {
+        this.x = x;
+    }
+
+    public Integer getY() {
+        return y;
+    }
+
+    public void setY(Integer y) {
+        this.y = y;
+    }
+
+    public Integer getMoveDistance() {
+        return moveDistance;
+    }
+
+    public void setMoveDistance(Integer moveDistance) {
+        this.moveDistance = moveDistance;
+    }
+
+    public Integer getHealth() {
+        return health;
+    }
+
+    public void setHealth(Integer health) {
+        this.health = health;
+    }
+
+    public EntityType getEntityType() {
+        return entityType;
+    }
+
+    public void setEntityType(EntityType entityType) {
+        this.entityType = entityType;
+    }
+
+    public List<Skills> getSkills() {
+        return skills;
+    }
+
+    public void setSkills(List<Skills> skills) {
+        this.skills = skills;
+    }
+
+    public GameGrid getGameGrid() {
+        return gameGrid;
+    }
+
+    public void setGameGrid(GameGrid gameGrid) {
+        this.gameGrid = gameGrid;
+    }
+
+    public GameBoard getGameBoard() {
+        return gameBoard;
+    }
+
+    public void setGameBoard(GameBoard gameBoard) {
+        this.gameBoard = gameBoard;
+    }
 }
