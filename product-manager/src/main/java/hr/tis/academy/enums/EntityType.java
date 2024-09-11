@@ -1,6 +1,7 @@
 package hr.tis.academy.enums;
 
 public enum EntityType {
+    EMPTY,
     HOLE,
     TILE,
     EGG,

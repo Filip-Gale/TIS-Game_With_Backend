@@ -23,4 +23,6 @@ public class GameLog {
 
     @Column
     private LocalDateTime createdTime;
+
+    public GameLog (){}
 }

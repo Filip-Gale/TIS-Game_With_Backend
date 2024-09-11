@@ -1,0 +1,15 @@
+###Get a GameBoard
+GET http://localhost:8080/user?userName=Gale
+Content-Type: application/json
+
+### Add a new user
+POST http://localhost:8080/user
+Content-Type: application/json
+
+{
+  "username": "ducky"
+}
+
+### Check if user exists
+GET http://localhost:8080/user/1/user-exists
+Content-Type: application/json

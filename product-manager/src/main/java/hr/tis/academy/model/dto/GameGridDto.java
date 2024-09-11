@@ -1,35 +1,25 @@
-package hr.tis.academy.model;
+package hr.tis.academy.model.dto;
 
-import hr.tis.academy.dto.GameObjectsDTO;
 import hr.tis.academy.enums.TerrainType;
+import hr.tis.academy.model.GameBoard;
+import hr.tis.academy.model.GameObjects;
 import jakarta.persistence.*;
-import jakarta.validation.constraints.Max;
-import jakarta.validation.constraints.Min;
 
 import java.util.List;
 
-@Entity
-@Table(name = "GAME_GRID", schema = "QUACKY")
-public class GameGrid {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+public class GameGridDto {
+
     private Long Id;
 
-    @Column
-    @Min(3)
-    @Max(8)
     private Integer gridSize;
 
-    @Enumerated(EnumType.STRING)
     private TerrainType terrainType;
 
-    @OneToMany(mappedBy = "gameGrid")
     private List<GameObjects> gameObjects;
 
-    @OneToMany(mappedBy = "gameGrid", fetch = FetchType.EAGER)
     private List<GameBoard> gameBoards;
 
-    public GameGrid() {}
+    public GameGridDto() {}
 
     public Long getId() {
         return Id;
@@ -39,11 +29,11 @@ public class GameGrid {
         Id = id;
     }
 
-    public @Min(3) @Max(8) Integer getGridSize() {
+    public Integer getGridSize() {
         return gridSize;
     }
 
-    public void setGridSize(@Min(3) @Max(8) Integer gridSize) {
+    public void setGridSize(Integer gridSize) {
         this.gridSize = gridSize;
     }
 

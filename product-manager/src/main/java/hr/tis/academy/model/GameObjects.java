@@ -1,5 +1,6 @@
 package hr.tis.academy.model;
 
+import hr.tis.academy.dto.GameObjectsDTO;
 import hr.tis.academy.enums.EntityType;
 import jakarta.persistence.*;
 
@@ -25,7 +26,7 @@ public class GameObjects {
     private Integer health;
 
     @Enumerated(EnumType.STRING)
-    private EntityType entityType;
+    private EntityType entityType = EntityType.EMPTY;
 
     @ManyToMany
     @JoinTable(schema = "QUACKY")
@@ -38,6 +39,14 @@ public class GameObjects {
     @ManyToOne
     @JoinColumn(name = "GAME_BOARD_ID")
     private GameBoard gameBoard;
+
+    public GameObjects(Integer x, Integer y, Integer moveDistance, Integer health, EntityType entityType) {
+        this.x = x;
+        this.y = y;
+        this.moveDistance = moveDistance;
+        this.health = health;
+        this.entityType = entityType;
+    }
 
     public Long getId() {
         return id;
@@ -109,5 +118,19 @@ public class GameObjects {
 
     public void setGameBoard(GameBoard gameBoard) {
         this.gameBoard = gameBoard;
+    }
+
+    public GameObjects() {}
+
+    public GameObjectsDTO toDTO() {
+        GameObjectsDTO gameObjectsDTO = new GameObjectsDTO();
+        gameObjectsDTO.setId(id);
+        gameObjectsDTO.setX(x);
+        gameObjectsDTO.setY(y);
+        gameObjectsDTO.setMoveDistance(moveDistance);
+        gameObjectsDTO.setHealth(health);
+        gameObjectsDTO.setEntityType(entityType);
+        gameObjectsDTO.setSkillsList(skills);
+        return gameObjectsDTO;
     }
 }
