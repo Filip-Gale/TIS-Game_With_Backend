@@ -31,7 +31,7 @@ public class GameObjects {
     @ManyToMany
     @JoinTable(schema = "QUACKY")
     private List<Skills> skills;
-// 34, 46, 58, 70
+
     @ManyToOne
     @JoinColumn(name = "GAME_GRID_ID")
     private GameGrid gameGrid;

@@ -14,4 +14,5 @@ public interface GameObjectsService {
     List<GameObjectsDTO> getEnemiesByUserID(Long userID);
     List<GameObjectsDTO> getObstaclesByUserID(Long userID);
     List<GameObjectsDTO> getEggsByUserID(Long userID);
+    void logGameObjectPositionDamage(Long id, Integer newX, Integer newY, Integer damage);
 }

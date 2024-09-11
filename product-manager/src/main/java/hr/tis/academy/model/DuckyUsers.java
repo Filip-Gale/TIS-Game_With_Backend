@@ -15,16 +15,20 @@ public class DuckyUsers {
     private String userName;
 
     @Column
+    private Boolean userExists;
+
+    @Column
     private Boolean isCheater;
 
     @OneToMany (mappedBy = "duckyUsers")
     private List<GameBoard> gameBoard;
 
-    public DuckyUsers() {}
-
     public DuckyUsers(String userName, Boolean userExists, Boolean isCheater) {
         this.userName = userName;
         this.isCheater = isCheater;
+    }
+
+    public DuckyUsers() {
     }
 
     public Long getId() {
@@ -41,6 +45,14 @@ public class DuckyUsers {
 
     public void setUserName(String userName) {
         this.userName = userName;
+    }
+
+    public Boolean getUserExists() {
+        return userExists;
+    }
+
+    public void setUserExists(Boolean userExists) {
+        this.userExists = userExists;
     }
 
     public Boolean getCheater() {
