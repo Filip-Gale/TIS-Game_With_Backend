@@ -16,8 +16,8 @@ public interface GameObjectsRepository extends JpaRepository<GameObjects, Long>{
     @Query(nativeQuery = true, value = "SELECT * FROM QUACKY.GAME_OBJECTS go WHERE go.ENTITY_TYPE = 'MAIN_CHARACTER' AND go.GAME_BOARD_ID IN (SELECT gb.ID FROM QUACKY.GAME_BOARD gb WHERE gb.DUCKY_USERS_ID = :id)")
     GameObjects fetchMainCharacterByUserID(Long id);
 
-    @Query(nativeQuery = true, value = "SELECT * FROM QUACKY.GAME_OBJECTS go WHERE go.ENTITY_TYPE = 'MAIN_CHARACTER' AND go.GAME_BOARD_ID IN (SELECT gb.ID FROM QUACKY.GAME_BOARD gb WHERE gb.DUCKY_USERS_ID = :id)")
-    GameObjects fetchMainCharacterSkillsByUserID(Long id);
+    @Query(nativeQuery = true, value = "SELECT * FROM QUACKY.GAME_OBJECTS go WHERE go.ENTITY_TYPE = 'MAIN_CHARACTER' AND go.ID = :mainCharacterID AND go.GAME_BOARD_ID IN (SELECT gb.ID FROM QUACKY.GAME_BOARD gb WHERE gb.DUCKY_USERS_ID = :id)")
+    GameObjects fetchMainCharacterSkillsByUserID(Long id, int mainCharacterID);
 
     @Query(nativeQuery = true, value = "SELECT * FROM QUACKY.GAME_OBJECTS go WHERE go.ENTITY_TYPE = 'ENEMY' AND go.GAME_BOARD_ID IN (SELECT gb.ID FROM QUACKY.GAME_BOARD gb WHERE gb.DUCKY_USERS_ID = :id)")
     List<GameObjects> fetchEnemiesByUserID(Long id);
