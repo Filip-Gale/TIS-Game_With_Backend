@@ -7,4 +7,5 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface DuckyUserRepository extends JpaRepository<DuckyUsers, Long> {
     DuckyUsers findByUserName(String username);
+    Boolean existsByUserName(String name);
 }

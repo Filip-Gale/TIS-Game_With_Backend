@@ -1,5 +1,6 @@
 package hr.tis.academy.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import hr.tis.academy.enums.GameState;
 import jakarta.persistence.*;
 

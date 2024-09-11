@@ -7,5 +7,5 @@ import hr.tis.academy.model.UserExists;
 public interface DuckyUserService{
     DuckyUsers getDuckyUsersByUserName(String username);
     DuckyUsersDto addDuckyUser(DuckyUsersDto duckyUsersDto);
-    UserExists checkIfDuckyUserExists(Long id);
+    UserExists checkIfDuckyUserExists(String name);
 }

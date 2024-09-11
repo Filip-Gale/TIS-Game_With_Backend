@@ -7,7 +7,7 @@ POST http://localhost:8080/user
 Content-Type: application/json
 
 {
-  "username": "ducky"
+  "userName": "đuro"
 }
 
 ### Check if user exists

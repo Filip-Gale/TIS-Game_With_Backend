@@ -1,5 +1,6 @@
 package hr.tis.academy.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import hr.tis.academy.dto.GameObjectsDTO;
 import hr.tis.academy.enums.EntityType;
 import jakarta.persistence.*;
@@ -36,6 +37,7 @@ public class GameObjects {
     @JoinColumn(name = "GAME_GRID_ID")
     private GameGrid gameGrid;
 
+    @JsonIgnore
     @ManyToOne
     @JoinColumn(name = "GAME_BOARD_ID")
     private GameBoard gameBoard;

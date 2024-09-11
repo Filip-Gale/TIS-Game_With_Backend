@@ -27,4 +27,6 @@ public interface GameObjectsRepository extends JpaRepository<GameObjects, Long>{
 
     @Query(nativeQuery = true, value = "SELECT * FROM QUACKY.GAME_OBJECTS go WHERE go.ENTITY_TYPE = 'OBSTACLE' AND go.GAME_BOARD_ID IN (SELECT gb.ID FROM QUACKY.GAME_BOARD gb WHERE gb.DUCKY_USERS_ID = :id)")
     List<GameObjects> fetchObstaclesByUserID(Long id);
+
+    List<GameObjects> findByGameBoardIdAndXAndY(Long gameBoardId, Integer x, Integer y);
 }

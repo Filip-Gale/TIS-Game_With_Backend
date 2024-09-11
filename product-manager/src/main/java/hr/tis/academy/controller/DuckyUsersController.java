@@ -30,15 +30,11 @@ public class DuckyUsersController {
 
     @PostMapping
     DuckyUsersDto addDuckyUsers(@RequestBody DuckyUsersDto duckyUsersDto) {
-        duckyUserService.addDuckyUser(duckyUsersDto);
-        DuckyUsersDto duckyUsersDto2 = new DuckyUsersDto();
-        duckyUsersDto2.setId(duckyUsersDto.getId());
-        duckyUsersDto2.setUserName(duckyUsersDto.getUserName());
-        return duckyUsersDto2;
+        return duckyUserService.addDuckyUser(duckyUsersDto);
     }
 
-    @GetMapping("{id}/user-exists")
-    UserExists checkUserExists(@PathVariable("id") Long id) {
-        return duckyUserService.checkIfDuckyUserExists(id);
+    @GetMapping("user-exists")
+    UserExists checkUserExists(@RequestParam String userName) {
+        return duckyUserService.checkIfDuckyUserExists(userName);
     }
 }

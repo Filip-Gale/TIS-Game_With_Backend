@@ -15,6 +15,7 @@ import java.util.List;
 
 @Repository
 public interface GameBoardRepository extends JpaRepository<GameBoard, Long> {
+    Boolean existsGameBoardByDuckyUsersIdAndGameState(Long userId, GameState state);
     GameBoard findByDuckyUsersId(Long duckyUsersId);
     GameBoard findByDuckyUsersIdAndGameState(Long duckyUsersId, GameState gameState);
     @Query("SELECT g FROM GameBoard g WHERE g.startTime <= :end AND g.endTime >= :start")

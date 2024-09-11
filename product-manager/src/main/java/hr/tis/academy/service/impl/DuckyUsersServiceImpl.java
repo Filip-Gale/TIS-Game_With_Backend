@@ -26,15 +26,15 @@ public class DuckyUsersServiceImpl implements DuckyUserService {
     @Override
     public DuckyUsersDto addDuckyUser(DuckyUsersDto duckyUsersDto) {
         DuckyUsers duckyUsers = new DuckyUsers(duckyUsersDto.getUserName(),true,false);
-        duckyUserRepository.save(duckyUsers);
+        DuckyUsers duckyUsers1 = duckyUserRepository.save(duckyUsers);
         DuckyUsersDto duckyUsersDto2 = new DuckyUsersDto();
-        duckyUsersDto2.setId(duckyUsers.getId());
-        duckyUsersDto2.setUserName(duckyUsers.getUserName());
+        duckyUsersDto2.setId(duckyUsers1.getId());
+        duckyUsersDto2.setUserName(duckyUsers1.getUserName());
         return duckyUsersDto2;
     }
 
     @Override
-    public UserExists checkIfDuckyUserExists(Long id) {
-        return new UserExists(duckyUserRepository.existsById(id));
+    public UserExists checkIfDuckyUserExists(String name) {
+        return new UserExists(duckyUserRepository.existsByUserName(name));
     }
 }
