@@ -4,6 +4,7 @@ import hr.tis.academy.dto.GameObjectsDTO;
 import hr.tis.academy.dto.SkillsDTO;
 import hr.tis.academy.model.GameObjects;
 import hr.tis.academy.model.Skills;
+import hr.tis.academy.model.dto.MoveDamageRequestDto;
 import hr.tis.academy.service.GameObjectsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -19,6 +20,17 @@ public class GameObjectsController {
     @Autowired
     public GameObjectsController(GameObjectsService gameObjectsService) {
         this.gameObjectsService = gameObjectsService;
+    }
+
+    @PostMapping("{id}/move")
+    public void moveGameObject(@PathVariable Long id, @RequestBody MoveDamageRequestDto moveDamageRequestDto) {
+        gameObjectsService.logGameObjectPositionDamage(id, moveDamageRequestDto.getObjectNewX(), moveDamageRequestDto.getObjectNewY(), moveDamageRequestDto.getDamage());
+    }
+
+    @PostMapping("{id}/take-damage")
+    public void takeDamageGameObject(@PathVariable Long id, @RequestBody MoveDamageRequestDto moveDamageRequestDto) {
+        gameObjectsService.logGameObjectPositionDamage(id, moveDamageRequestDto.getObjectNewX(),
+                moveDamageRequestDto.getObjectNewY(), moveDamageRequestDto.getDamage());
     }
 
     @GetMapping("/main-character")
