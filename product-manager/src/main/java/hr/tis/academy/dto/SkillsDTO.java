@@ -1,32 +1,14 @@
-package hr.tis.academy.model;
+package hr.tis.academy.dto;
 
-import jakarta.persistence.*;
-
-import java.util.List;
-
-@Entity
-@Table(name = "SKILLS", schema = "QUACKY")
-public class Skills {
-    public Skills() {
+public class SkillsDTO {
+    public SkillsDTO() {
     }
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-
-    @Column
     private Integer damage;
-
-    @Column
     private Integer skillRange;
-
-    @Column
-    private Boolean movesEnemy;
-
-    @Column
+    private Integer movesEnemy;
     private Integer howMuchItMovesEnemy;
-
-    @Column
     private String skillDescription;
 
     public Long getId() {
@@ -53,11 +35,11 @@ public class Skills {
         this.skillRange = skillRange;
     }
 
-    public Boolean getMovesEnemy() {
+    public Integer getMovesEnemy() {
         return movesEnemy;
     }
 
-    public void setMovesEnemy(Boolean movesEnemy) {
+    public void setMovesEnemy(Integer movesEnemy) {
         this.movesEnemy = movesEnemy;
     }
 
