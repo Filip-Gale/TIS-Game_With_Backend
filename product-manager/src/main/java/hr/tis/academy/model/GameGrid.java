@@ -1,7 +1,6 @@
 package hr.tis.academy.model;
 
-import hr.tis.academy.dto.GameObjectsDTO;
-import hr.tis.academy.enums.TerrainType;
+import hr.tis.academy.model.enums.TerrainType;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Max;
 import jakarta.validation.constraints.Min;

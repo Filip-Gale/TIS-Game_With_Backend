@@ -1,14 +1,12 @@
 package hr.tis.academy.service.impl;
 
 import hr.tis.academy.dto.GameObjectsDTO;
-import hr.tis.academy.enums.EntityType;
-import hr.tis.academy.enums.GameState;
-import hr.tis.academy.enums.TerrainType;
+import hr.tis.academy.model.enums.EntityType;
+import hr.tis.academy.model.enums.GameState;
 import hr.tis.academy.file.LogWriter;
 import hr.tis.academy.model.GameBoard;
 import hr.tis.academy.model.GameGrid;
 import hr.tis.academy.model.GameObjects;
-import hr.tis.academy.model.dto.GameBoardDto;
 import hr.tis.academy.model.dto.GameGridDto;
 import hr.tis.academy.model.dto.GameHistoryDto;
 import hr.tis.academy.model.dto.GameStateDto;
@@ -17,7 +15,7 @@ import hr.tis.academy.repository.GameBoardRepository;
 import hr.tis.academy.repository.GameGridRepository;
 import hr.tis.academy.repository.GameObjectsRepository;
 import hr.tis.academy.service.GameBoardService;
-import jakarta.annotation.PostConstruct;
+import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -105,6 +103,7 @@ public class GameBoardServiceImpl implements GameBoardService {
         return  gameGridDTO;
     }
 
+    @Transactional
     @Override
     public GameGridDto findGameGridByUserId(Long userId) {
         if(gameBoardRepository.existsGameBoardByDuckyUsersIdAndGameState(userId, GameState.GAME_IN_PROGRESS)){

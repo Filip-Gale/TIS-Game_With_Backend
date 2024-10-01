@@ -25,7 +25,6 @@ public class DuckyUsersController {
         duckyUsersDto.setId(duckyUsers.getId());
         duckyUsersDto.setUserName(userName);
         return duckyUsersDto;
-
     }
 
     @PostMapping

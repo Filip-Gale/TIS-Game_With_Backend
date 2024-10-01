@@ -2,7 +2,7 @@ package hr.tis.academy.service.impl;
 
 import hr.tis.academy.dto.GameObjectsDTO;
 import hr.tis.academy.dto.SkillsDTO;
-import hr.tis.academy.enums.EntityType;
+import hr.tis.academy.model.enums.EntityType;
 import hr.tis.academy.file.LogWriter;
 import hr.tis.academy.model.GameObjects;
 import hr.tis.academy.model.Skills;
@@ -106,8 +106,7 @@ public class GameObjectsServiceImpl implements GameObjectsService {
                 String damageLog = formattedEntityType + " takes " + damage + " damage, his current health is " + (health - damage);
                 logWriter.writeLogToFile(damageLog, LOG_FILE);
                 gameObjectsRepository.save(gameObject);
-            }
-            else {
+            } else {
                 String defeatLog = formattedEntityType + " is defeated (health <= 0).";
                 logWriter.writeLogToFile(defeatLog, LOG_FILE);
                 gameObjectsRepository.delete(gameObject);

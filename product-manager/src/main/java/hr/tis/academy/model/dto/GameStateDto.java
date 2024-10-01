@@ -1,6 +1,6 @@
 package hr.tis.academy.model.dto;
 
-import hr.tis.academy.enums.GameState;
+import hr.tis.academy.model.enums.GameState;
 
 public class GameStateDto {
     public Long userId;

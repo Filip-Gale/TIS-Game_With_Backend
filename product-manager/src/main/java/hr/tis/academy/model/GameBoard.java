@@ -1,10 +1,8 @@
 package hr.tis.academy.model;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import hr.tis.academy.enums.GameState;
+import hr.tis.academy.model.enums.GameState;
 import jakarta.persistence.*;
 
-import java.security.PrivateKey;
 import java.time.LocalDateTime;
 import java.util.List;
 

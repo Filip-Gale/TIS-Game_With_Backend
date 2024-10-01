@@ -1,7 +1,7 @@
 package hr.tis.academy.dto;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
-import hr.tis.academy.enums.EntityType;
+import hr.tis.academy.model.enums.EntityType;
 import hr.tis.academy.model.Skills;
 
 import java.util.List;

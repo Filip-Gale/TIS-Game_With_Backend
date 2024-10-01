@@ -1,9 +1,8 @@
 package hr.tis.academy.model.dto;
 
-import hr.tis.academy.enums.TerrainType;
+import hr.tis.academy.model.enums.TerrainType;
 import hr.tis.academy.model.GameBoard;
 import hr.tis.academy.model.GameObjects;
-import jakarta.persistence.*;
 
 import java.util.List;
 

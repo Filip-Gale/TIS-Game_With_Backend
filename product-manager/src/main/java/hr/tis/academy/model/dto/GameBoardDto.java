@@ -1,11 +1,10 @@
 package hr.tis.academy.model.dto;
 
-import hr.tis.academy.enums.GameState;
+import hr.tis.academy.model.enums.GameState;
 import hr.tis.academy.model.DuckyUsers;
 import hr.tis.academy.model.GameGrid;
 import hr.tis.academy.model.GameLog;
 import hr.tis.academy.model.GameObjects;
-import jakarta.persistence.*;
 
 import java.time.LocalDateTime;
 import java.util.List;

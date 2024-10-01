@@ -2,7 +2,7 @@ package hr.tis.academy.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import hr.tis.academy.dto.GameObjectsDTO;
-import hr.tis.academy.enums.EntityType;
+import hr.tis.academy.model.enums.EntityType;
 import jakarta.persistence.*;
 
 import java.util.List;
