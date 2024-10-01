@@ -1,9 +1,15 @@
 
 # Paklenica
 
-Projektni zadatak tima Paklenica
+Projektni zadatak tima Paklenica za Hackathon TIS grupe
 
+Trajanje zadatka: 2 dana
 
+(2 day project for TIS Hackathon)
+
+Spring Backend za java igricu
+
+(Spring backend for a java game)
 
 ![App Screenshot](https://upload.wikimedia.org/wikipedia/commons/thumb/4/41/Canyon_of_Paklenica.jpg/1280px-Canyon_of_Paklenica.jpg)
 
